@@ -29,6 +29,7 @@
   visibility: hidden;
   background: 50% top no-repeat #FEDE4F;
   opacity: 0.3;
+  filter: alpha(opacity=30);
   border: 1px solid #aaa;
 }
 .items .big-box {

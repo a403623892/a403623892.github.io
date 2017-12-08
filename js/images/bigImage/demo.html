@@ -10,12 +10,13 @@
 		window.onload = function(){
 			var items = document.getElementById('items');
 			var mask = document.getElementById('mask');
-			var img = document.getElementById('mask-img');
-			var zoom = mask.getElementsByClassName('zoom')[0];
-			var bigImg = document.getElementById('big-img');
-			var bigBox = document.getElementsByClassName('big-box')[0];
-			var scale = bigImg.width/img.width;//计算放大比例
-
+			var img = mask.getElementsByTagName('img')[0];
+			var zoom = document.getElementById('zoom');
+			var bigBox = document.getElementById('big-box');
+			var bigImg = bigBox.getElementsByTagName('img')[0];
+			var scale = 2;//计算放大比例
+			// var scale = bigImg.width/img.width;
+			// console.log(bigImg.width);
 			mask.onmouseover = function(){
 				zoom.style.visibility = 'visible';
 				bigBox.style.display = 'block';
@@ -25,7 +26,6 @@
 				bigBox.style.display = 'none';
 			}
 			mask.onmousemove = function(e){
-				// console.log(scale);
 				var _e = window.event || e;//事件对象
 				var x = _e.clientX - items.offsetLeft -zoom.offsetWidth/2;//对象在盒子横向偏移量
 				//offsetLeft 相对于定位的父盒子左侧距离
@@ -53,10 +53,10 @@
 <body>
 	<div class="items" id="items">
 		<div class="main-img" id='mask'>
-			<img src="./images/img.jpg" id='mask-img'>
-			<div class="zoom"></div>
+			<img src="./images/img.jpg">
+			<div class="zoom" id="zoom"></div>
 		</div>
-		<div class="big-box"><img src="./images/img1.jpg" id="big-img"></div>
+		<div class="big-box" id="big-box"><img src="./images/img1.jpg"></div>
 	</div>
 </body>
 </html>
