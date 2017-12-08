@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<link rel="stylesheet" type="text/css" href="./css/demo.css">
+	<script type="text/javascript">
+	//1获取相关元素
+	//2绑定点击事件，计算放大比例scale
+		window.onload = function(){
+			var items = document.getElementById('items');
+			var mask = document.getElementById('mask');
+			var img = document.getElementById('mask-img');
+			var zoom = mask.getElementsByClassName('zoom')[0];
+			var bigImg = document.getElementById('big-img');
+			var bigBox = document.getElementsByClassName('big-box')[0];
+			var scale = bigImg.width/img.width;//计算放大比例
+
+			mask.onmouseover = function(){
+				zoom.style.visibility = 'visible';
+				bigBox.style.display = 'block';
+			}
+			mask.onmouseout = function(){
+				zoom.style.visibility = 'hidden';
+				bigBox.style.display = 'none';
+			}
+			mask.onmousemove = function(e){
+				// console.log(scale);
+				var _e = window.event || e;//事件对象
+				var x = _e.clientX - items.offsetLeft -zoom.offsetWidth/2;//对象在盒子横向偏移量
+				//offsetLeft 相对于定位的父盒子左侧距离
+				var y = _e.clientY - items.offsetTop -zoom.offsetHeight/2;//对象在盒子竖向偏移量
+				if (x<0) {
+					x =0;//做偏移小于盒子设为0
+				}
+				if (y<0) {
+					y=0;
+				}
+				if (x>items.offsetWidth-zoom.offsetWidth) {
+					x=items.offsetWidth-zoom.offsetWidth;
+				}
+				if (y>items.offsetWidth-zoom.offsetHeight) {
+					y=items.offsetWidth-zoom.offsetHeight;
+				}
+				zoom.style.left = x+'px';
+				zoom.style.top = y+'px';
+				bigImg.style.left = -x*scale + 'px';
+				bigImg.style.top = -y*scale + 'px';
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="items" id="items">
+		<div class="main-img" id='mask'>
+			<img src="./images/img.jpg" id='mask-img'>
+			<div class="zoom"></div>
+		</div>
+		<div class="big-box"><img src="./images/img1.jpg" id="big-img"></div>
+	</div>
+</body>
+</html>
