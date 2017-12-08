@@ -13,10 +13,9 @@
 			var img = mask.getElementsByTagName('img')[0];
 			var zoom = document.getElementById('zoom');
 			var bigBox = document.getElementById('big-box');
-			var bigImg = bigBox.getElementsByTagName('img')[0];
-			var scale = 2;//计算放大比例
 			// var scale = bigImg.width/img.width;
 			// console.log(bigImg.width);
+			// 隐藏元素无法获取到宽高值
 			mask.onmouseover = function(){
 				zoom.style.visibility = 'visible';
 				bigBox.style.display = 'block';
@@ -26,6 +25,8 @@
 				bigBox.style.display = 'none';
 			}
 			mask.onmousemove = function(e){
+				var bigImg = bigBox.getElementsByTagName('img')[0];
+				var scale = bigImg.width/img.width;//计算放大比例
 				var _e = window.event || e;//事件对象
 				var x = _e.clientX - items.offsetLeft -zoom.offsetWidth/2;//对象在盒子横向偏移量
 				//offsetLeft 相对于定位的父盒子左侧距离
@@ -48,6 +49,7 @@
 				bigImg.style.top = -y*scale + 'px';
 			}
 		}
+
 	</script>
 </head>
 <body>
