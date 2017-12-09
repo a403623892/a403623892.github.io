@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+.box {
+  width: 500px;
+  height: 200px;
+  position: relative;
+  top: 100px;
+  left: 300px;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.box ul {
+  width: 500%;
+  height: 200px;
+  position: relative;
+  left: 0;
+}
+.box ul li {
+  float: left;
+}
+.box ul li img {
+  width: 500px;
+}
+.box .arrow {
+  display: none;
+}
+.box .arrow span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  line-height: 40px;
+  font-size: 23px;
+  text-align: center;
+  font-family: '黑体';
+  cursor: pointer;
+}
+.box .arrow .l_r {
+  right: 0;
+  left: auto;
+}

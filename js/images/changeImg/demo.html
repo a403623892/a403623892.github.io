@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>切换图片</title>
+	<link rel="stylesheet" type="text/css" href="./css/demo.css">
+</head>
+
+<body>
+	<div class="box" id="banner">
+		<ul>
+			<li>
+				<a href="javascript:void(0)"><img src="./images/1.jpg" alt=""></a>
+			</li>
+			<li>
+				<a href="javascript:void(0)"><img src="./images/2.jpg" alt=""></a>
+			</li>
+			<li>
+				<a href="javascript:void(0)"><img src="./images/3.jpg" alt=""></a>
+			</li>
+			<li>
+				<a href="javascript:void(0)"><img src="./images/4.jpg" alt=""></a>
+			</li>
+			<li>
+				<a href="javascript:void(0)"><img src="./images/5.jpg" alt=""></a>
+			</li>
+		</ul>
+		<div class="arrow">
+			<span class="l_f"><</span>
+			<span class="l_r">></span>
+		</div>
+	</div>
+	<script>
+	var banner = document.getElementById('banner');
+	var arr = banner.getElementsByTagName('div')[0];
+	var arrList = arr.children;
+	var ul = banner.children[0];
+	var imgList = ul.getElementsByTagName('img');
+	var index = 0;
+
+	banner.onmouseover = function() {
+		arr.style.display = "block";
+	}
+	banner.onmouseout = function() {
+		for (var i = 0; i < arrList.length; i++) {
+			arr.style.display = "none";
+		}
+	}
+
+	arrList[0].onclick = function() {
+		index--;
+		if (index < 0) {
+			index = 0;
+			ul.style.left = 0;
+		}
+		animate(ul,-index*imgList[0].offsetWidth);
+	}
+	arrList[1].onclick = function() {
+		index++;
+		if (index > 4) {
+			index = 4;
+			ul.style.left = imgList[0]*index+"px";
+		}
+		animate(ul,-index*imgList[0].offsetWidth);
+	}
+		//添加动画
+	function animate(obj, target) {
+		clearInterval(obj.timer);
+		var speed = obj.offsetLeft < target ? 15 : -15;
+		obj.timer = setInterval(function() {
+			var result = target - obj.offsetLeft;
+			obj.style.left = obj.offsetLeft + speed + "px";
+			if (Math.abs(result) <=10) {
+				clearInterval(obj.timer);
+				obj.style.left = target + "px";
+			}
+		}, 10)
+	}
+	</script>
+</body>
+
+</html>
