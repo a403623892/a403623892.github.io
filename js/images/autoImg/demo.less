@@ -4,27 +4,33 @@
 	list-style: none;
 	border: 0;
 }
+//修改宽高参数
 .banner {
-	width: 500px;
-	height: 200px;
+	width: 409px;
+	height: 220px;
 	border: 1px solid #ccc;
 	margin: 100px auto;
 	position: relative;
 	.screen {
-		width: 500px;
-		height: 200px;
+		width: 409px;
+		height: 220px;
 		overflow: hidden;
 		position: relative;
 		ul {
 			position: absolute;
 			left: 0;
 			top: 0px;
-			width: 3000px;
+			//ul宽度至少为屏幕宽度*（图片数量+1）
+			width: 600%;
 			li {
-				width: 500px;
-				height: 200px;
+				width: 409px;
+				height: 220px;
 				overflow: hidden;
 				float: left;
+				img{
+					width: 409px;
+					height: 220px;
+				}
 			}
 		}
 		ol {
