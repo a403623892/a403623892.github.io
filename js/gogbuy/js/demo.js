@@ -58,7 +58,7 @@
     }
     //鼠标移出开启定时器
     banner.onmouseout = function () {
-        div.style.display = "none";
+        // div.style.display = "none";
         timer = setInterval(autoPlay,3000);
     }
     function animate(ele,target){
