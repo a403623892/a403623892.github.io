@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>autofadeInimg</title>
+</head>
+<style>
+ul {
+	list-style: none;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#ads {
+	width: 590px;
+	height: 250px;
+	border: 3px solid #eee;
+	margin: 20px auto;
+	position: relative;
+	box-shadow: 0 0 3px #000; 
+}
+
+#ads img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+
+#ads img.show {
+	display: block;
+}
+
+#ads ul {
+	position: absolute;
+	bottom: 10px;
+	left: 240px;
+}
+
+#ads ul li {
+	width: 12px;
+	height: 12px;
+	float: left;
+	background: rgba(255, 255, 255, 0.7);
+	margin-right: 8px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+#ads ul li.active {
+	background: orange;
+}
+</style>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script>
+$(function() {
+	var timer = null;
+	var cur = 0;
+	var len = $("#ads li").length;
+
+	$("#ads").hover(function() {
+		clearInterval(timer);
+	}, function() {
+		showImg();
+	});
+	$("#ads li").click(function() {
+		clearInterval(timer);
+		cur = $(this).index();
+		$(this).addClass("active").siblings().removeClass("active");
+		$("#ads img").eq(cur).fadeIn(200).siblings("img").fadeOut(200);
+	});
+
+	//定义图片切换函数
+	function showImg() {
+		timer = setInterval(function() {
+			cur++;
+			if (cur >= len) {
+				cur = 0;
+			}
+			$("#ads img").eq(cur).fadeIn(200).siblings("img").fadeOut(200);
+			$("#ads li ").eq(cur).addClass("active").siblings().removeClass("active");
+
+		}, 1000);
+	}
+	showImg();
+});
+</script>
+
+<body>
+	<div id="ads">
+		<img src="../changeImg/images/1.jpg" alt="" class="show" />
+		<img src="../changeImg/images/2.jpg" alt="" />
+		<img src="../changeImg/images/3.jpg" alt="" />
+		<img src="../changeImg/images/4.jpg" alt="" />
+		<img src="../changeImg/images/5.jpg" alt="" />
+		<ul>
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+
+</html>
