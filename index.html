@@ -1,82 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<title>前端展示页面</title>
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<style type="text/css">
+		.deo{
+			margin:10px auto;
+			position:absolute;
+			top: 100px;
+			right: 100px;
+		}
+	</style>
 </head>
 <body>
 	<div class="nav" id="nav-all"></div>
 	<div class="timer" id="t-timer"></div>
+	<a class="deo" href="./js/images/changeImg3D/demoJS.html" target="_blank">asdsadsd</a>
 	<script>
 		var navAll = document.getElementById('nav-all');
 		var json = {
 			"list1":[
-				{title:"菜单一"},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
-				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"手机效果"},
+				{title:"菜单一二",href:'javascript:viod(0)'},
+				{title:"菜单一二",href:'javascript:viod(0)'},
+				{title:"菜单一二",href:'javascript:viod(0)'},
+				{title:"菜单一二",href:'javascript:viod(0)'},
+				{title:"菜单一二",href:'javascript:viod(0)'},
+				{title:"菜单一二",href:'javascript:viod(0)'}
 			],
 			"list2":[
-				{title:"菜单二"},
+				{title:"内容展示"},
 				{title:"菜单二",href:'javascript:viod(0)'},
 				{title:"菜单二",href:'javascript:viod(0)'},
 				{title:"菜单二",href:'javascript:viod(0)'},
 				{title:"菜单二",href:'javascript:viod(0)'},
 				{title:"菜单二",href:'javascript:viod(0)'},
-				{title:"菜单二",href:'javascript:viod(0)'},
-				{title:"菜单二",href:'javascript:viod(0)'},
-				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'}
 			],
 			"list3":[
-				{title:"菜单三"},
+				{title:"表单代码"},
 				{title:"菜单三",href:'javascript:viod(0)'},
 				{title:"菜单三",href:'javascript:viod(0)'},
 				{title:"菜单三",href:'javascript:viod(0)'},
 				{title:"菜单三",href:'javascript:viod(0)'},
 				{title:"菜单三",href:'javascript:viod(0)'},
-				{title:"菜单三",href:'javascript:viod(0)'},
-				{title:"菜单三",href:'javascript:viod(0)'},
-				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'}
 			],
 			"list4":[
-				{title:"菜单四"},
+				{title:"时间日期"},
 				{title:"菜单四",href:'javascript:viod(0)'},
 				{title:"菜单四",href:'javascript:viod(0)'},
 				{title:"菜单四",href:'javascript:viod(0)'},
 				{title:"菜单四",href:'javascript:viod(0)'},
 				{title:"菜单四",href:'javascript:viod(0)'},
-				{title:"菜单四",href:'javascript:viod(0)'},
-				{title:"菜单四",href:'javascript:viod(0)'},
-				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'}
+				
 			],
 			"list5":[
-				{title:"菜单五"},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-			],
-			"list6":[
-				{title:"菜单六"},
-				{title:"菜单六",href:'javascript:viod(0)'},
-				{title:"菜单六",href:'javascript:viod(0)'},
-				{title:"菜单三",href:'javascript:viod(0)'},
-				{title:"菜单四",href:'javascript:viod(0)'},
-				{title:"菜单五",href:'javascript:viod(0)'},
-				{title:"菜单六",href:'javascript:viod(0)'},
-				{title:"菜单七",href:'javascript:viod(0)'},
-				{title:"菜单八",href:'javascript:viod(0)'},
+				{title:"图片轮换"},
+				{title:"菜单1",href:'./js/images/changeImg3D/demoJS.html'},
+				{title:"菜单2",href:'./js/images/changeImg3D/demoJS.html'},
+				{title:"菜单3",href:'./js/images/changeImg3D/demoJS.html'},
+				{title:"菜单4",href:'./js/images/changeImg3D/demoJS.html'},
+				{title:"菜单5",href:'./js/images/changeImg3D/demoJS.html'},
+				{title:"菜单6",href:'./js/images/changeImg3D/demoJS.html'}
 			]
 		};
 		var str = '';
@@ -103,29 +91,6 @@
 		mt = now.getMonth() + 1,
 		yy = now.getFullYear()
 		weekVal = now.getDay();
-		switch (weekVal) {
-			case 0:
-				msg1 = "星期日";
-				break;
-			case 1:
-				msg1 = "星期一";
-				break;
-			case 2:
-				msg1 = "星期二";
-				break;
-			case 3:
-				msg1 = "星期三";
-				break;
-			case 4:
-				msg1 = "星期四";
-				break;
-			case 5:
-				msg1 = "星期五";
-				break;
-			case 6:
-				msg1 = "星期六";
-				break;
-		}
 		timer.innerHTML = yy + "年" + mt + "月" + dd + "日";
 	</script>
 </body>
