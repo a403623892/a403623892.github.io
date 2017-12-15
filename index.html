@@ -1,10 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>前端展示页面</title>
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-<img src="images/download.jpg">
-<a href="./js/images/bigImage/demo.html">1</a>
-<a href="./js/gogbuy/index.html">1</a>
+	<div class="nav" id="nav-all"></div>
+	<div class="timer" id="t-timer"></div>
+	<script>
+		var navAll = document.getElementById('nav-all');
+		var json = {
+			"list1":[
+				{title:"菜单一"},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+				{title:"菜单一",href:'javascript:viod(0)'},
+			],
+			"list2":[
+				{title:"菜单二"},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+				{title:"菜单二",href:'javascript:viod(0)'},
+			],
+			"list3":[
+				{title:"菜单三"},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+			],
+			"list4":[
+				{title:"菜单四"},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+			],
+			"list5":[
+				{title:"菜单五"},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+			],
+			"list6":[
+				{title:"菜单六"},
+				{title:"菜单六",href:'javascript:viod(0)'},
+				{title:"菜单六",href:'javascript:viod(0)'},
+				{title:"菜单三",href:'javascript:viod(0)'},
+				{title:"菜单四",href:'javascript:viod(0)'},
+				{title:"菜单五",href:'javascript:viod(0)'},
+				{title:"菜单六",href:'javascript:viod(0)'},
+				{title:"菜单七",href:'javascript:viod(0)'},
+				{title:"菜单八",href:'javascript:viod(0)'},
+			]
+		};
+		var str = '';
+		for (var k in json) {
+			var items = json[k];
+			var sub = '<div class="nav-item">';
+			for (var j = 0; j < items.length; j++) {
+				var son = items[j];
+				if( j == 0 ){
+					sub += '<span class="nav-text">'+son.title+'</span><div class="nav-link">';
+				}else{
+					sub += '<div class="nav-item-link"><div class="nav-bg-link"><a class="nav-text-link" href="'+son.href+'">'+son.title+'</a></div></div>';
+				}if (j == items.length - 1) {
+					sub += '</div></div>';
+				}
+			}
+			str += sub ;
+		}
+		str += '<div class="nav-center"></div>';
+		navAll.innerHTML = str;
+		var timer =document.getElementById('t-timer');
+		var now = new Date();
+		var dd = now.getDate(),
+		mt = now.getMonth() + 1,
+		yy = now.getFullYear()
+		weekVal = now.getDay();
+		switch (weekVal) {
+			case 0:
+				msg1 = "星期日";
+				break;
+			case 1:
+				msg1 = "星期一";
+				break;
+			case 2:
+				msg1 = "星期二";
+				break;
+			case 3:
+				msg1 = "星期三";
+				break;
+			case 4:
+				msg1 = "星期四";
+				break;
+			case 5:
+				msg1 = "星期五";
+				break;
+			case 6:
+				msg1 = "星期六";
+				break;
+		}
+		timer.innerHTML = yy + "年" + mt + "月" + dd + "日";
+	</script>
 </body>
+
 </html>
