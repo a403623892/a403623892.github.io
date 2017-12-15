@@ -1,128 +1,151 @@
 ﻿<!doctype html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>无标题文档</title>
     <link rel="stylesheet" type="text/css" href="./demo.css">
     <script>
-        window.onload = function () {
-            //无缝轮播
-            //步骤：
-            //获取相关元素,js创建ol中li标签
-            var banner = document.getElementById("banner");
-            var screen = banner.firstElementChild || banner.firstChild;
-            var imgWidth = screen.offsetWidth;
-            var ul = screen.firstElementChild || screen.firstChild;
-            var ol = screen.children[1];
-            var div = screen.lastElementChild || screen.lastChild;
-            var spanArr = div.children;
-            //复制第一张图
-            var ulNewLi = ul.children[0].cloneNode(true);
-            ul.appendChild(ulNewLi);
-            //js创建ol中li标签
-            for(var i=0;i<ul.children.length-1;i++){
-                var olNewLi = document.createElement("li");
-                ol.appendChild(olNewLi)
-            }
-            var olLiArr = ol.children;
-            olLiArr[0].className = "current";
-            //鼠标移入ol切换图片
-            for(var i=0;i<olLiArr.length;i++){
-                //自定义属性，把索引值绑定到元素的index属性上
-                olLiArr[i].index = i;
-                olLiArr[i].onmouseover = function () {
-                    for(var j=0;j<olLiArr.length;j++){
-                        olLiArr[j].className = "";
-                    }
-                    this.className = "current";
-                    key = square = this.index;
-                    animate(ul,-this.index*imgWidth);
+    window.onload = function() {
+        var screen = document.getElementById('screen'),
+            list = document.getElementById('screen-act'),
+            listArr = list.getElementsByTagName('li'),
+            ol = screen.getElementsByTagName('ol')[0],
+            imgWidth = screen.offsetWidth,
+            span = document.getElementById('screen-arr'),
+            spanArr = span.children;
+        //复制第一张图
+        listNew = listArr[0].cloneNode(true);
+        list.appendChild(listNew);
+        //创建ol下的li
+        for (var i = 0; i < listArr.length - 1; i++) {
+            ol.appendChild(document.createElement("li"))
+        }
+        var olLiArr = ol.children;
+        olLiArr[0].className = "current";
+        for (var i = 0; i < olLiArr.length; i++) {
+            olLiArr[i].index = i;
+            olLiArr[i].onmouseover = function() {
+                for (var j = 0; j < olLiArr.length; j++) {
+                    olLiArr[j].className = "";
                 }
-            }
-            //定时器
-            var timer = setInterval(autoPlay,3000);
-            var key = 0;
-            var square = 0;
-            function autoPlay(){
-                key++;
-                if(key>olLiArr.length){
-                    ul.style.left = 0;
-                    key = 1;
-                }
-                animate(ul,-key*imgWidth);
-                square++;
-                if(square>olLiArr.length-1){
-                    square = 0;
-                }
-                for(var i=0;i<olLiArr.length;i++){
-                    olLiArr[i].className = "";
-                }
-                olLiArr[square].className = "current";
-            }
-            //鼠标移入清除定时器
-            banner.onmouseover = function () {
-                div.style.display = "block";
-                clearInterval(timer);
-            }
-            //鼠标移出开启定时器
-            banner.onmouseout = function () {
-                div.style.display = "none";
-                timer = setInterval(autoPlay,3000);
-            }
-            spanArr[0].onclick = function () {
-                key--;
-                if(key<0){
-                    ul.style.left = -imgWidth*(olLiArr.length)+"px";
-                    key = olLiArr.length-1;
-                }
-                animate(ul,-key*imgWidth);
-                square--;
-                if(square<0){
-                    square = olLiArr.length-1;
-                }
-                for(var i=0;i<olLiArr.length;i++){
-                    olLiArr[i].className = "";
-                }
-                olLiArr[square].className = "current";
-            }
-            spanArr[1].onclick = function () {
-                autoPlay();
-            }
-            function animate(ele,target){
-                clearInterval(ele.timer);
-                var speed = 0;
-                ele.timer = setInterval(function () {
-                    speed  = (target - ele.offsetLeft)/8;
-                    speed = speed > 0 ? Math.ceil(speed):Math.floor(speed);
-                    if(ele.offsetLeft == target){
-                        ele.style.left = target + "px";
-                        clearInterval(ele.timer);
-                    }
-                    ele.style.left = ele.offsetLeft + speed + "px";
-                    
-                },30)
+                this.className = "current";
+                key = square = this.index;
+                act(list, {
+                    left: -this.index * imgWidth
+                });
             }
         }
+        var timer = setInterval(autoPlay, 3000);
+        var key = 0;
+        var square = 0;
+
+        function autoPlay() {
+            key++;
+            if (key > olLiArr.length) {
+                list.style.left = 0;
+                key = 1;
+            }
+            act(list, {
+                left: -key * imgWidth
+            });
+            square++;
+            if (square > olLiArr.length - 1) {
+                square = 0;
+            }
+            for (var i = 0; i < olLiArr.length; i++) {
+                olLiArr[i].className = "";
+            }
+            olLiArr[square].className = "current";
+        }
+        screen.onmouseover = function() {
+            span.style.display = "block";
+            clearInterval(timer);
+        }
+        screen.onmouseout = function() {
+            span.style.display = "none";
+            timer = setInterval(autoPlay, 3000);
+        }
+        spanArr[0].onclick = function() {
+            key--;
+            if (key < 0) {
+                list.style.left = -imgWidth * (olLiArr.length) + "px";
+                key = olLiArr.length - 1;
+            }
+            act(list, {
+                left: -key * imgWidth
+            });
+            square--;
+            if (square < 0) {
+                square = olLiArr.length - 1;
+            }
+            for (var i = 0; i < olLiArr.length; i++) {
+                olLiArr[i].className = "";
+            }
+            olLiArr[square].className = "current";
+        }
+        spanArr[1].onclick = function() {
+            autoPlay();
+        }
+
+        function act(obj, json, fn) {
+            clearInterval(obj.timer);
+            var stop = true;
+            obj.timer = setInterval(function() {
+                for (var attr in json) {
+                    var target = json[attr];
+                    var cur = parseInt(getStyle(obj, attr));
+                    var speed = 0;
+                    speed = (target - cur) / 8;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    if (cur != target) {
+                        stop = false;
+                    }
+                    cur += speed;
+                    if (attr == 'opacity') {
+                        obj.style.filter = 'alpha(opacity:' + cur + ')';
+                        obj.style[attr] = cur / 100;
+                    }
+                    obj.style[attr] = cur + 'px';
+                    if (stop) {
+                        clearInterval(obj.timer);
+                        if (fn) {
+                            fn();
+                        }
+                    }
+                }
+            }, 30);
+        }
+
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            } else {
+                return getComputedStyle(obj, false)[attr];
+            }
+        }
+    }
     </script>
 </head>
 
 <body>
-<div class="banner" id='banner'>
-    <div class="screen" id="screen">
-        <ul id="ul">
-            <li><img src="images/1.jpg" width="500" height="200" /></li>
-            <li><img src="images/2.jpg" width="500" height="200" /></li>
-            <li><img src="images/3.jpg" width="500" height="200" /></li>
-            <li><img src="images/4.jpg" width="500" height="200" /></li>
-            <li><img src="images/5.jpg" width="500" height="200" /></li>
-        </ul>
-        <ol>
-        </ol>
-        <div class="arr"">
-            <span class="arr_left"><</span>
-            <span class="arr_right">></span>
+    <div class="banner">
+        <div class="screen" id="screen">
+            <ul id="screen-act">
+                <li><img src="images/1.jpg" width="500" height="200" /></li>
+                <li><img src="images/2.jpg" width="500" height="200" /></li>
+                <li><img src="images/3.jpg" width="500" height="200" /></li>
+                <li><img src="images/4.jpg" width="500" height="200" /></li>
+                <li><img src="images/5.jpg" width="500" height="200" /></li>
+            </ul>
+            <ol>
+            </ol>
+            <div class="arr" id="screen-arr">
+                <span class="arr_left "><</span>
+                <span class="arr_right ">></span>
+            </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

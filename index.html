@@ -16,7 +16,6 @@
 <body>
 	<div class="nav" id="nav-all"></div>
 	<div class="timer" id="t-timer"></div>
-	<a class="deo" href="./js/images/changeImg3D/demoJS.html" target="_blank">asdsadsd</a>
 	<script>
 		var navAll = document.getElementById('nav-all');
 		var json = {
@@ -30,7 +29,7 @@
 				{title:"菜单一二",href:'javascript:viod(0)'}
 			],
 			"list2":[
-				{title:"内容展示"},
+				{title:"时间日期"},
 				{title:"菜单二",href:'javascript:viod(0)'},
 				{title:"菜单二",href:'javascript:viod(0)'},
 				{title:"菜单二",href:'javascript:viod(0)'},
@@ -48,7 +47,7 @@
 				{title:"菜单三",href:'javascript:viod(0)'}
 			],
 			"list4":[
-				{title:"时间日期"},
+				{title:"内容展示"},
 				{title:"菜单四",href:'javascript:viod(0)'},
 				{title:"菜单四",href:'javascript:viod(0)'},
 				{title:"菜单四",href:'javascript:viod(0)'},
@@ -58,12 +57,12 @@
 				
 			],
 			"list5":[
-				{title:"图片轮换"},
+				{title:"图片部分"},
 				{title:"菜单1",href:'./js/images/changeImg3D/demoJS.html'},
-				{title:"菜单2",href:'./js/images/changeImg3D/demoJS.html'},
-				{title:"菜单3",href:'./js/images/changeImg3D/demoJS.html'},
-				{title:"菜单4",href:'./js/images/changeImg3D/demoJS.html'},
-				{title:"菜单5",href:'./js/images/changeImg3D/demoJS.html'},
+				{title:"菜单2",href:'./js/images/autoImg/demo.html'},
+				{title:"菜单3",href:'./js/images/skinChange/demo.html'},
+				{title:"菜单4",href:'./js/images/fadeInImg/demo.html'},
+				{title:"菜单5",href:'./js/images/bigImg/demo.html'},
 				{title:"菜单6",href:'./js/images/changeImg3D/demoJS.html'}
 			]
 		};
@@ -76,7 +75,7 @@
 				if( j == 0 ){
 					sub += '<span class="nav-text">'+son.title+'</span><div class="nav-link">';
 				}else{
-					sub += '<div class="nav-item-link"><div class="nav-bg-link"><a class="nav-text-link" href="'+son.href+'">'+son.title+'</a></div></div>';
+					sub += '<div class="nav-item-link"><div class="nav-bg-link"><a target="_blank" class="nav-text-link" href="'+son.href+'">'+son.title+'</a></div></div>';
 				}if (j == items.length - 1) {
 					sub += '</div></div>';
 				}

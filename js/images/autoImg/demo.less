@@ -4,57 +4,57 @@
 	list-style: none;
 	border: 0;
 }
-//修改宽高参数
+body{
+	background-color: #68547b;
+}
 .banner {
-	width: 409px;
-	height: 220px;
-	border: 1px solid #ccc;
+	width: 600px;
+	height: 319px;
 	margin: 100px auto;
 	position: relative;
 	.screen {
-		width: 409px;
-		height: 220px;
+		width: 600px;
+		height: 319px;
 		overflow: hidden;
 		position: relative;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
 		ul {
 			position: absolute;
 			left: 0;
 			top: 0px;
-			//ul宽度至少为屏幕宽度*（图片数量+1）
 			width: 600%;
 			li {
-				width: 409px;
-				height: 220px;
+				width: 600px;
+				height: 314px;
 				overflow: hidden;
 				float: left;
 				text-align: center;
-				img{
-					width: 409px;
-					height: 220px;
+				box-shadow:0 5px 4px rgba(0,0,0,.3);
+				img {
+					width: 600px;
+					height: 314px;
 				}
 			}
 		}
 		ol {
 			position: absolute;
-			left: 50%;
-			margin-left:-80px;
 			bottom: 10px;
 			line-height: 20px;
 			text-align: center;
+			width: 600px;
 			li {
-				float: left;
-				width: 11px;
-				height: 11px;
-				background: rgba(0,0,0,0);
+				display:inline-block;
+				width: 10px;
+				height: 10px;
+				background: #fff;
 				margin-left: 10px;
 				cursor: pointer;
-				border: 2px solid #fff;
-				border: 2px solid rgba(255,255,255,0.5);
 				border-radius: 50%;
-				// border-color: #fff;
 			}
 			.current {
-				background: #fff;
+				background: #FF7A01;
 			}
 		}
 	}
@@ -76,7 +76,9 @@
 			font-size: 30px;
 			color: #fff;
 			opacity: 0.3;
-			border: 1px solid #fff;
+			-webkit-border-radius: 8px;
+			-moz-border-radius: 8px;
+			border-radius: 8px;
 		}
 		.arr_right {
 			right: 5px;
