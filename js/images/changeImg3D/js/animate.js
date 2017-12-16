@@ -28,7 +28,7 @@ function animate(obj,json,fn) {
             }
             //去掉px 的方法   parseInt(25px)   25
             /* alert(leader);*/
-            var step = (json[k] - leader) / 10;
+            var step = (json[k] - leader) / 8;
             step = step > 0 ? Math.ceil(step) : Math.floor(step);
             leader = leader + step;
             if( k == "opacity") {   // 记住我们的透明是不加单位的  不要加px

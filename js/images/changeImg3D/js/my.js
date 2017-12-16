@@ -1,43 +1,53 @@
 ﻿window.onload = function() {
-    var arrow = document.getElementById("arrow");  // 三角
-    var wrap = document.getElementById("wrap");   // 大盒子
-    var slide = document.getElementById("slide");
+    var arrow = document.getElementById("d-arrow");  // 三角
+    var wrap = document.getElementById("d-wrap");   // 大盒子
+    var slide = document.getElementById("d-slide");
     var lis = slide.children[0].children;   // 获得所有的li
     var json = [  //  包含了5张图片里面所有的样式
         {
-            width:400,
-            top:70,
-            left:50,
+        //z-index: 1; top: 48px; left: 0px; width: 240px; height: 160px;
+            width:240,
+            height:160,
+            top:48,
+            left:0,
             opacity:20,
             z:2
         },
         {  
-            width:600,
-            top:120,
-            left:0,
+        //z-index: 2; top: 24px; left: 98px; width: 360px; height: 200px;
+            width:360,
+            height:200,
+            top:24,
+            left:98,
             opacity:80,
-            z:3
+            z:2
         },
         {  
-            width:800,
-            top:100,
-            left:200,
+            //z-index: 3; top: 0px; left: 235px; width: 550px; height: 240px;
+            width:550,
+            height:240,
+            top:0,
+            left:235,
             opacity:100,
-            z:4
+            z:3
         },
         { 
-            width:600,
-            top:120,
-            left:600,
+            //z-index: 2; top: 24px; left: 540px; width: 360px; height: 200px;
+            width:360,
+            height:200,
+            top:24,
+            left:540,
             opacity:80,
-            z:3
+            z:2
         },
         {   
-            width:400,
-            top:70,
-            left:750,
+            //z-index: 1; top: 48px; left: 735px; width: 240px; height: 160px;
+            width:240,
+            height:160,
+            top:48,
+            left:735,
             opacity:20,
-            z:2
+            z:1
         }
     ];
     wrap.onmouseover = function() {   // 鼠标经过显示 三角
@@ -56,7 +66,7 @@
             if(this.className == "prev") {  // 左侧按钮
                 if(flag == true) {   // 实现按钮只能点击一次
                     move(true);
-                    flag = false;
+                    // flag = false;
                 }
             }
             else
@@ -67,7 +77,7 @@
             // 右侧按钮
                if(flag == true) {   // 实现按钮只能点击一次
                    move(false);
-                   flag = false;
+                   // flag = false;
                }
             }
         }
@@ -89,6 +99,7 @@
                 top: json[i].top,
                 left: json[i].left,
                 opacity: json[i].opacity,
+                height: json[i].height,
                 zIndex: json[i].z
             },function(){ flag = true; })
         }
