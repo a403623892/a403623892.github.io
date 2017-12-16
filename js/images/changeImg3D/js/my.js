@@ -9,7 +9,7 @@
             width:240,
             height:160,
             top:48,
-            left:0,
+            left:22,
             opacity:20,
             z:2
         },
