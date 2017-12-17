@@ -1,71 +1,134 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <title>全选反选少选复选框</title>
-    <style type="text/css">
-        .demo1{ text-align:center;}
-        .demo1 input{ margin-right:5px;}
-    </style>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .wrap {
+      width: 300px;
+      margin: 100px auto 0;
+    }
+    
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      border: 1px solid #c0c0c0;
+    }
+    
+    th,
+    td {
+      border: 1px solid #d0d0d0;
+      color: #404060;
+      padding: 10px;
+    }
+    
+    th {
+      background-color: #09c;
+      font: bold 16px "微软雅黑";
+      color: #fff;
+    }
+    
+    td {
+      font: 14px "微软雅黑";
+    }
+    
+    tbody tr {
+      background-color: #f0f0f0;
+    }
+    
+    tbody tr:hover {
+      cursor: pointer;
+      background-color: #fafafa;
+    }
+  </style>
+  <script src="jquery.min.js"></script>
+  <script>
+    $(function() {
+      var $j_cbAll = $("#j_cbAll"), // 获取全选checkbox：jQuery对象
+        //j_cbAll = $j_cbAll[0], // 获取全选checkbox：DOM对象
+        $tb = $("#j_tb"), // 获取到表格body元素
+        $cbs = $tb.find(":checkbox"), // 获取tbody中所有的复选框
+        cbsLen = $cbs.length; // 获取复选框的长度
+
+      // 给全选checkbox绑定单击事件：处理所有选项的checkbox选中状态
+      $j_cbAll.click(function() {
+        // 判断表示全选的 复选框是否被选中
+        var isChecked = $(this).prop("checked");
+        // 如果是选中，那么此时值为：true；则，让所有其他的checkbox全部选中
+        if (isChecked === true) {
+          $cbs.prop("checked", true);
+        } else {
+          $cbs.prop("checked", false);
+        }
+      });
+
+      // 给所有 tbody中的 checkbox元素 绑定click事件
+      $cbs.click(function() {
+        // 获取所有被选中的checkbox个数
+        var $selCheckBox = $tb.find(":checkbox:checked"); // 此处只有复选框
+
+        if ($selCheckBox.length === cbsLen) {
+          $j_cbAll.prop("checked", true);
+        } else {
+          $j_cbAll.prop("checked", false);
+        }
+
+      });
+    });
+  </script>
 </head>
+
 <body>
-<div class="demo1">
-    <h5><input type="checkbox" id="all" /><label>全选选项</label></h5>
-    <p><input type="checkbox" name="item" /><label>选项（一）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（二）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（三）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（四）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（五）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（六）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（七）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（八）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（九）</label></p>
-    <p><input type="checkbox" name="item" /><label>选项（十）</label></p>
-</div>
-<script>
-    (function(){
-        var all = document.getElementById('all');
-        var check = document.getElementsByTagName('input');
-        var len = check.length - 1;
-        all.onclick = function(){
-            choose(this.checked);
-        }
-        function each(arr, callback){
-            var len = arr.length;
-            for(var i = 1; i < len; i++){
-                if(callback.call(arr[i], i, arr[i]) === false){
-                    break;
-                }
-            }
-            return arr;
-        }
-        function choose(t){
-            each(check, function(i){
-                check[i].checked = t;
-            });
-        }
-        each(check, function(i){
-            check[i].onclick = function(){
-                if(!this.checked){
-                    all.checked = false;
-                }
-                if(checkLen() == len){
-                    all.checked = true;
-                } else {
-                    all.checked = false;
-                }
-            }
-        });
-        function checkLen(){
-            var n = 0;
-            each(check, function(i){
-                if(this.checked){
-                    n++;
-                }
-            });
-            return n;
-        }
-    }());
-</script>
+  <div class="wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" id="j_cbAll" />
+          </th>
+          <th>课程名称</th>
+          <th>所属</th>
+        </tr>
+      </thead>
+      <tbody id="j_tb">
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>JavaScript</td>
+          <td>前端</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>css</td>
+          <td>前端</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>html</td>
+          <td>前端</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>jQuery</td>
+          <td>前端</td>
+        </tr>
+  
+      </tbody>
+    </table>
+  </div>
 </body>
+
 </html>
