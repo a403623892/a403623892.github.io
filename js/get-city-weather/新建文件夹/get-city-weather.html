@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" name="" id="weather-city">
+	<input type="button" value='获取城市天气预报' id="weather-btn">
+	<table id='weather'></table>
+	<select>
+		<option value="长沙">长沙</option>
+		<option value="北京">北京</option>
+		<option value="上海">上海</option>
+		<option value="武汉">武汉</option>
+	</select>
+</body>
+</html>
+
+<script type="text/javascript" src='../js/template-native.js'></script>
+
+<script type="text/template" id='template'>
+<% for(var i=0;i<weatherResults.length;i++){ %>
+		<tr>
+			<td>日期：<%=weatherResults[i].date%></td>
+			<td>风力：<%=weatherResults[i].fengli%></td>
+			<td>风向：<%=weatherResults[i].fengxiang%></td>
+			<td>最高温度：<%=weatherResults[i].high%></td>
+			<td>最低温度：<%=weatherResults[i].low%></td>
+			<td>天气：<%=weatherResults[i].type%></td>
+		</tr>
+<% } %>
+</script>
+
+<script type="text/javascript" src='../js/jquery-3.0.0.min.js'></script>
+<script type="text/javascript">
+	
+	$("#weather-btn").click(function () {
+		var w_city = $("select").val();
+		// var Reg =/^[\u4e00-\u9fa5]*$/;
+		// if(!Reg.test(w_city)){
+		// 	alert('请输入中文:您所在的城市');
+		// }else{
+			console.log(w_city);
+			$.ajax({
+				url:"http://wthrcdn.etouch.cn/weather_mini?city="+w_city+"",
+				dataType:'jsonP',
+				success:function(data){
+					console.log(data);
+					// console.log(data.data.forecast[0]);
+					console.log(data.data.forecast);
+					// 读取对象
+					// var weatherResults = data.results[0];
+					var weather = data.data.forecast;
+					// // // 读取模板
+					var obj = {
+						weatherResults: weather
+					}
+					var str = template('template',obj);
+					console.log(str);
+					
+					// // 添加到界面上
+					$("#weather").html(str);
+				}
+			})
+		// }
+	})
+</script>
