@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="./jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".w-content").click(function() {
+			$(this).find('.w-main').slideToggle();
+		});
+	});
+	</script>
+
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		overflow: hidden;
+	}
+	ol,a{
+		list-style: none;
+		text-decoration: none;
+	}
+	.wrap {
+		width: 300px;
+		margin:100px auto;
+	}
+	.wrap .w-content{
+	    background-color: #fff;
+		padding-left: 5px;
+
+	}
+	.wrap .w-content h1 a{
+		font-size: 18px;
+		color: #0a8cd2;
+		background-color: #fff;
+		display: block;
+		width: 300px;
+		height: 30px;
+		line-height: 30px;
+		border-radius: 6px;
+		transition: all 0.3s;
+	}
+	.wrap .w-content:hover h1 a {
+		background-color: #393;
+		color: #fff;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+		padding-left: 15px;
+		width: 285px;
+	}
+	.wrap .w-content .w-main{
+		display: none;
+	}
+	.wrap .w-content .w-main dd a{
+		border-radius: 6px;
+		transition:all .3s;
+		color: #0a8cd2;
+		margin-left: 10px;
+		display: block;
+		width: 290px;
+	}
+	.wrap .w-content .w-main dd:hover a{
+		background-color: #393;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+		padding-left: 15px;
+		width: 285px;
+		color: #fff;
+		width: 275px;
+	}
+	</style>
+</head>
+
+<body>
+<div class="wrap">
+	<ol>
+		<li class="w-content">
+			<h1><a href="#">第一章</a></h1>
+			<dl class="w-main">
+				<dd><a href="#">内容1</a></dd>
+				<dd><a href="#">内容1</a></dd>
+				<dd><a href="#">内容1</a></dd>
+				<dd><a href="#">内容1</a></dd>
+				<dd><a href="#">内容1</a></dd>
+			</dl>
+		</li>
+		<li class="w-content">
+			<h1><a href="#">第二章</a></h1>
+			<dl class="w-main">
+				<dd><a href="#">内容2</a></dd>
+				<dd><a href="#">内容2</a></dd>
+				<dd><a href="#">内容2</a></dd>
+				<dd><a href="#">内容2</a></dd>
+				<dd><a href="#">内容2</a></dd>
+			</dl>
+		</li>
+		<li class="w-content">
+			<h1><a href="#">第三章</a></h1>
+			<dl class="w-main">
+				<dd><a href="#">内容3</a></dd>
+				<dd><a href="#">内容3</a></dd>
+				<dd><a href="#">内容3</a></dd>
+				<dd><a href="#">内容3</a></dd>
+				<dd><a href="#">内容3</a></dd>
+			</dl>
+		</li>
+		<li class="w-content">
+			<h1><a href="#">第四章</a></h1>
+			<dl class="w-main">
+				<dd><a href="#">内容4</a></dd>
+				<dd><a href="#">内容4</a></dd>
+				<dd><a href="#">内容4</a></dd>
+				<dd><a href="#">内容4</a></dd>
+				<dd><a href="#">内容4</a></dd>
+			</dl>
+		</li>
+		<li class="w-content">
+			<h1><a href="#">第五章</a></h1>
+			<dl class="w-main">
+				<dd><a href="#">内容5</a></dd>
+				<dd><a href="#">内容5</a></dd>
+				<dd><a href="#">内容5</a></dd>
+				<dd><a href="#">内容5</a></dd>
+				<dd><a href="#">内容5</a></dd>
+			</dl>
+		</li>
+	</ol>
+</div>
+</body>
+
+</html>
