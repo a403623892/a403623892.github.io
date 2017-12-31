@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	body{font:12px/1.5 Arial;}
+	p{border: 1px dotted #000;color: green;padding:10px 15px;background-color: #f0f0f0;word-wrap: break-word;}
+	input{margin-right: 3px}
+	}
+	</style>
+</head>
+<body>
+	<p>January(1),February(2),March(3),April(4),May(5),June(6),July(7),Aguest(8),September(9),October(10),November(11),December(12)</p>
+	<div>
+		<input type="button" value="删除January(1)">
+		<input type="button" value="删除December(12)">
+	</div>
+	<p>0,1,2,3,4,5,6,7,8,9</p>
+	<div>
+		<input type="button" value="复制">
+		<input type="button" value="还原">
+	</div>
+	<p>red,green,blue,white,yellow,black,brown</p>
+	<div>
+		<input type="button" value="还原">
+		<input type="button" value="删除前三项">
+		<input type="button" value="删除第二至第三项">
+		<input type="button" value="在第二项后插入(orange,purple)">
+		<input type="button" value="替换第二项和第三项">
+	</div>
+	<script>
+		var p = document.getElementsByTagName('p'),
+			input = document.getElementsByTagName('input'),
+			arr = [],
+			flag1 = true,
+			flag2 = true;
+			input[0].onclick = function(){
+				getArray(p[0].innerHTML);
+				flag1?(arr.shift(),this.value = this.value.replace("删除","添加"), flag1 = false):(arr.unshift('January(1)'),this.value = this.value.replace("添加","删除"),flag1 = true);
+				p[0].innerHTML = arr.join();
+			}
+			input[1].onclick = function(){
+				getArray(p[0].innerHTML);
+				var u = [1,2,3,1,23,4];
+				flag2?(arr.pop(),this.value = this.value.replace("删除","添加"), flag2 = false):(arr.push('December(12)'),this.value = this.value.replace("添加","删除"),flag2 = true);
+				p[0].innerHTML = arr.join();
+			}
+			input[2].onclick = function(){
+				getArray(p[1].innerHTML)
+				p[1].innerHTML=arr.concat(arr).toString().replace(/s/g,'')
+			}
+			input[3].onclick = function(){
+				getArray(p[1].innerHTML);
+				arr.length = 10;
+				p[1].innerHTML=arr.join()
+			}
+			input[4].onclick = function(){
+				arr = ['red','green','blue','white','yellow','black','brown'];
+				p[2].innerHTML=arr.join()
+			}
+			input[5].onclick = function(){
+				getArray(p[2].innerHTML);
+				arr.splice(0,3)
+				p[2].innerHTML=arr.join()
+			}
+			input[6].onclick = function(){
+				getArray(p[2].innerHTML);
+				arr.splice(1,2);
+				p[2].innerHTML=arr.join()
+			}
+			input[7].onclick = function(){
+				getArray(p[2].innerHTML);
+				arr.splice(1,0,'orange,purple');
+				p[2].innerHTML=arr.join()
+			}
+			input[8].onclick = function(){
+				getArray(p[2].innerHTML);
+				arr.splice(1,2,'purple','orange');
+				p[2].innerHTML=arr.join()
+			}
+			function getArray(str){
+				arr = [];
+				str = str.split(",");
+				for(var i in str)arr.push(str[i])
+					return arr
+			}
+
+	</script>
+</body>
+</html>

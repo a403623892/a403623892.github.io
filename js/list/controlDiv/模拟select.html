@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body,input,ul,li{margin: 0;padding: 0;}
+	body{background-color: #23384e;font-size:12px;}
+	ul{list-style: none}
+	input{border:none;outline:none;display: block;}
+	#search{width: 350px;height: 34px;margin: 10px auto;background: url('images/search.jpg')0px 0px;background-repeat: no-repeat;line-height: 34px;position: relative;}
+	#search .box{height: 34px;background: url('images/search.jpg')no-repeat;background-position: right 0}
+	#search .box form{background: url('images/search.jpg')no-repeat;display:block;background-repeat: repeat-x;background-position: 0 -34px;height: 34px;margin: 0 20px 0 40px;}
+	#search .box .se{float:left;width: 200px;height: 22px;margin-top: 4px;background: url('images/search.jpg')0 -68px no-repeat;padding:0 0 0 10px;cursor:pointer;color:#fff;font-size: 12px}
+	#search .box .se1{float:left;width: 80px;height: 23px;line-height: 22px;margin-top: 4px;background: url('images/search.jpg')0px -90px no-repeat;font-size: 12px;text-indent: -4px;color: #333;}
+	#search .box .se1:hover{color: orange;background-position: -80px -90px}
+	/*下拉列表*/
+	#search ul{position: absolute;top:26px;left: 40px;background-color: #2b2b2b;border: 1px solid #fff;width: 198px;display: none}
+	#search ul li{padding-left: 10px;height:25px;line-height: 24px;border-bottom: 1px dotted #fff;color:#fff;margin-bottom: -1px}
+	#search ul li:hover{background-color: #8b8b8b;}
+	</style>
+</head>
+<body>
+	<div id="search">
+		<div class="box">
+			<form>
+				<input type="text" value="请选择游戏名称" class='se'>
+				<input type="button" value="搜 索" class="se1">
+			</form>
+		</div>	
+		<ul>
+			<li>地下城与勇士</li>
+			<li>魔兽世界（国服）</li>
+			<li>魔兽世界（台服）</li>
+			<li>热血江湖</li>
+			<li>神鬼传奇</li>
+			<li>大话西游II</li>
+			<li>QQ幻想世界</li>
+		</ul>
+	</div>
+	<script>
+		var search = document.getElementById('search'),
+			input = search.getElementsByTagName('input'),
+			ul = search.getElementsByTagName('ul')[0],
+			liArr = ul.getElementsByTagName('li');
+			input[0].onclick = function(e){
+				ul.style.display = ul.style.display == 'block' ? 'none' : 'block';
+				(e||window.e).cancelBubble = true
+			}
+			for (var i = 0; i < liArr.length; i++) {
+				liArr[i].onclick = function(){
+					ul.style.display = 'none';
+					input[0].value = this.innerHTML
+				}
+			}
+			window.onclick = function(){
+				ul.style.display = 'none'
+			}
+	</script>
+</body>
+</html>

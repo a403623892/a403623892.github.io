@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,span{margin: 0;padding: 0;}
+		#clock{width: 400px;height: 40px;line-height:40px;background-color: #000;margin: 10px auto;text-align: center;color: #fff;}
+		span{color: #000;width: 80px;line-height: 40px;background: #fbfbfb;border: 2px solid #b4b4b4;margin: 0 10px;padding: 0 10px;}
+	
+	</style>
+</head>
+<body>
+	<div id="clock">
+		<span>00</span>
+		点
+		<span>00</span>
+		分
+		<span>00</span>
+		秒
+	</div>
+	<script>
+	var oClock = document.getElementById("clock");	
+	var span = oClock.getElementsByTagName("span");
+		
+	setInterval(getTimes, 1000);
+	getTimes();
+	function getTimes (){
+		var date = new Date();
+		var date = [date.getHours(),date.getMinutes(),date.getSeconds()];
+		for (var i in date) span[i].innerHTML = format(date[i])
+	}
+	function format(a){
+		return a.toString().replace(/^(\d)$/, "0$1")//不足两位前补0	
+	}
+	</script>
+</bdy>
+</html>

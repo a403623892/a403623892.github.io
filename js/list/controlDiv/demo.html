@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{background: url(images/timg.jpg);background-size: cover;background-repeat: no-repeat;}
+		#dragon{width: 327px;height: 247px;background: url('images/dragon.png');position: absolute;top: 169px;left: 387px;background-size: cover;transform: scaleX(-1);}
+		#person{width: 140px;height: 83px;background: url('images/person1.png');position: absolute;top: 256px;left:331px;background-size: cover;}
+		#dragon1{width: 359px;height: 342px;background: url('images/dragon1.gif');position: absolute;top: 0px;left: 700px;background-size: cover}
+	</style>
+</head>
+<body>
+	<input type="button" value="根据鼠标点击位置移动"><input type="button" value="根据标鼠标轨迹移动">
+	<p>请点击按钮激活功能！↑ ↓ ← →控制</p>
+	<div id="person"></div>
+	<div id="dragon"></div>
+	<div id="dragon1"></div>
+	<script>
+	var dragon = document.getElementById('dragon'),
+		person = document.getElementById('person'),
+		dragon1 = document.getElementById('dragon1'),
+		input = document.getElementsByTagName('input'),
+		oL = oR = oT = oB = false,
+		arr = [{x:dragon1.offsetLeft,y:dragon1.offsetTop}],
+		timer = null;
+		setInterval(function (){
+			if (oL){
+				dragon1.style.left = dragon1.offsetLeft - 10 + "px"
+			}
+			else if(oR){
+				dragon1.style.left = dragon1.offsetLeft + 10 + "px"
+			}
+			if (oT){
+				dragon1.style.top = dragon1.offsetTop - 10 + "px"	
+			}
+			else if(oB){
+				dragon1.style.top = dragon1.offsetTop + 10 + "px"
+			}
+		},30);	
+		document.onkeydown = function (event){
+			var event = event || window.event;
+			switch (event.keyCode){
+				case 37:
+					oL = true;
+					break;
+				case 38:
+					oT = true;
+					break;
+				case 39:
+					oR = true;
+					break;
+				case 40:
+					oB = true;
+					break;
+			}
+			return false
+		};
+		document.onkeyup = function (event){
+			switch ((event || window.event).keyCode){
+				case 37:
+					oL = false;
+					break;
+				case 38:
+					oT = false;
+					break;
+				case 39:
+					oR = false;
+					break;
+				case 40:
+					oB = false;
+					break;
+			}
+		};
+		dragon.onclick = function(){
+			clearTimeout(timer);
+			person.style.background='url(images/person1.gif)';
+			dragon.style.background='url(images/dragon.gif)';
+			dragon.style.backgroundSize = "cover";
+		 	person.style.backgroundSize = "cover";
+		 	setTimeout(function(){
+		 		person.style.background='url(images/person1.png)';
+				dragon.style.background='url(images/dragon.png)';
+				dragon.style.backgroundSize = "cover";
+		 		person.style.backgroundSize = "cover";
+		 	},6500)
+		}
+		input[0].onclick = function(event){
+			(event || window.event).cancelBubble = true;
+			clearValue();
+			this.value += '(已激活)';
+			document.onclick = function(event){
+				var event = event || window.event;
+				var le = parseInt(event.clientX - dragon1.offsetWidth/2);
+				var ri = parseInt(event.clientY - dragon1.offsetHeight/2);
+				act(dragon1,{'left': le,'top': ri})
+				return false
+			}
+		}
+		input[1].onclick = function(event){
+			(event || window.event).cancelBubble = true;
+			clearValue();
+			this.value += '(已激活)';
+			document.onmousedown = function(event){
+				event = event || window.event;
+				arr.push({x:event.clientX,y:event.clientY});
+				document.onmousemove = function(event){
+					var le = parseInt(event.clientX - dragon1.offsetWidth/2);
+					var ri = parseInt(event.clientY - dragon1.offsetHeight/2);
+					arr.push({x:le,y:ri});
+					return false
+				}
+				return false
+			}
+			document.onmouseup = function(){
+				document.onmousemove = null;
+				var timer = setInterval(function(){
+					arr.shift();
+					arr.length == 0 ? clearInterval(timer) : (dragon1.style.left = arr[0].x + "px",dragon1.style.top = arr[0].y + "px");
+				},30)
+			}
+		}
+		function clearValue(){
+			document.onclick = null;
+			document.onmousedown = null;
+			document.onmouseup = null;
+			for (var i = 0; i < input.length; i++) {
+				input[i].value = input[i].value.replace('(已激活)','');
+			}
+		}
+		function act(obj, json, fn) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function() {
+            var stop = true;
+                for (var attr in json) {
+                    var cur = 0;
+                    if (attr == 'opacity') {
+                    	cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+                    }else{
+                   	    cur = parseInt(getStyle(obj, attr));  
+                    }
+                    var speed = 0;
+                    speed = (json[attr] - cur) / 8;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    if (cur != json[attr]) {
+                        stop = false;
+                    }
+                    cur += speed;
+                    if (attr == 'opacity') {
+                        obj.style.filter = 'alpha(opacity:' + cur + ')';
+                        obj.style.opacity = cur / 100;
+                    }
+                    obj.style[attr] = cur + 'px';
+                    if (stop) {
+                    	console.log('1')
+                        clearInterval(obj.timer);
+                        fn&&fn();
+                    }
+                }
+            }, 30);
+        }
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            } else {
+                return getComputedStyle(obj, false)[attr];
+            }
+        }
+	</script>
+</body>
+</html>
