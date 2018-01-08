@@ -1,0 +1,84 @@
+<!DOCTYPE html>  
+<html>  
+    <head>  
+        <title></title>  
+        <meta charset="UTF-8" />  
+        <script src="test.js" type="text/javascript" charset="utf-8"></script>  
+        <style type="text/css">  
+            body{  
+                background-image: url(img/bg.jpg);  
+                font-family: "微软雅黑";  
+            }  
+            ul li{list-style:none;float:left;cursor:pointer;padding:0 5px;border:1px solid #ccc;border-radius:2px;margin: 0 2px;}  
+            .content,content-radio,content-checkbox{display:inline;}  
+            .selected{background-color: #17D6AA;}  
+        </style>  
+    </head>  
+  
+    <body>  
+        <span>jquery 获取 ul li 的值: <span class="content">全部</span></span>  
+        <ul>  
+            <li>值一</li>  
+            <li>值二</li>  
+            <li>值三</li>  
+            <li>值四</li>  
+            <li>值五</li>  
+        </ul>  
+        <br><br>  
+          
+        <span>jquery 获取 radio 的值: <span class="content-radio">全部</span></span><br>  
+        <label><input type="radio" name="sex" value="男">男</label>  
+        <label><input type="radio" name="sex" value="女">女</label>  
+        <label><input type="radio" name="sex" value="保密">保密</label>  
+        <!--  
+        <p>1、$('input:radio:checked').val();</p>  
+        <p>2、$("input[type='radio']:checked").val();</p>  
+        <p>3、$("input[name='sex']:checked").val();</p>  
+        <p>4、val 可以换成 text;</p>  
+        -->  
+        <br><br>  
+          
+        <span>jquery 获取 checkbox 的值: <span class="content-checkbox">全部</span></span><br>  
+        <label><input type="checkbox" name="con" value="内容一">内容一</label>  
+        <label><input type="checkbox" name="con" value="内容二">内容二</label>  
+        <label><input type="checkbox" name="con" value="内容三">内容三</label>  
+        <br><br>  
+          
+        <span>jquery 获取 select 的值: <span class="content-select">全部</span></span><br>  
+        <select>  
+            <option>-请选择-</option>  
+            <option>选择一</option>  
+            <option>选择二</option>  
+            <option>选择三</option>  
+        </select>  
+    </body>  
+    <script type="text/javascript" src="jquery.js" ></script>  
+        <script>  
+            $(function(){  
+                // 获取 ul li 中的值  
+                $("ul").find("li").click(function(){  
+                    $(this).addClass("selected").siblings().removeClass("selected");  
+                    $(".content").text($(this).text());  
+                });  
+                // 获取 radio 中的值  
+                $("input[type='radio']").click(function(){  
+                    $(".content-radio").text($("input[type='radio']:checked").val());  
+                });  
+                // 获取 checkbox 中的值  
+                $("input[type='checkbox']").click(function(){  
+                    var cons = [];// 每次点击需清空上次选择内容，避免重复  
+                    $("input[type=checkbox]").each(function(){  
+                        if(this.checked){  
+                            cons.push($(this).val());  
+                            $(".content-checkbox").text(cons);  
+                        }  
+                    });  
+                });  
+                // 获取 select 中的值  
+                $("select").click(function(){  
+                    $(".content-select").text($('select option:selected').text());  
+                });  
+            });  
+        </script>  
+</html>  
+
