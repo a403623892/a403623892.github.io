@@ -1,0 +1,575 @@
+html {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%
+}
+
+body,dd,div,dl,dt,h1,h2,h3,h4,h5,h6,li,ol,p,ul {
+	margin: 0;
+	padding: 0
+}
+
+ol,ul {
+	list-style: none
+}
+
+article,aside,audio,canvas,details,figcaption,figure,footer,header,main,menu,nav,progress,section,summary,video {
+	display: block;
+	margin: 0;
+	padding: 0
+}
+
+a {
+	text-decoration: none;
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none
+}
+
+a:active,
+a:hover {
+	outline-width: 0;
+	text-decoration: none
+}
+
+img {
+	border-style: none;
+	vertical-align: middle
+}
+
+button,input,optgroup,select,textarea {
+	font: inherit;
+	margin: 0;
+	padding: 0
+}
+
+button,input {
+	overflow: visible
+}
+
+button,select {
+	text-transform: none
+}
+
+textarea {
+	overflow: auto;
+	resize: none
+}
+
+::-webkit-input-placeholder {
+	color: #999
+}
+
+:-moz-placeholder {
+	color: #999
+}
+
+::-moz-placeholder {
+	color: #999
+}
+
+:-ms-input-placeholder {
+	color: #999
+}
+
+.hide {
+	display: none!important
+}
+
+.hidden {
+	visibility: hidden!important
+}
+
+.f-left {
+	float: left
+}
+
+.f-right {
+	float: right
+}
+
+.text-left {
+	text-align: left
+}
+
+.text-center {
+	text-align: center
+}
+
+.text-right {
+	text-align: right
+}
+
+.relative {
+	position: relative
+}
+
+.absolute {
+	position: absolute
+}
+
+.fixed {
+	position: fixed
+}
+
+.static {
+	position: static!important
+}
+
+.g-top-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999
+}
+
+.focus-container {
+	position: relative;
+	overflow: hidden
+}
+
+.focus-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0
+}
+
+.focus-wrapper:before,
+.focus-wrapper:after {
+	content: " ";
+	display: table
+}
+
+.focus-wrapper:after {
+	clear: both
+}
+
+.focus-slide {
+	float: left
+}
+
+.focus-slide a,
+.focus-slide img {
+	display: block;
+	width: 100%;
+	height: 100%
+}
+
+.focus-next,.focus-prev {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translate(0, -50%);
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-o-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	cursor: pointer
+}
+
+.focus-prev {
+	left: 0
+}
+
+.focus-next {
+	right: 0
+}
+
+.focus-pagination {
+	position: absolute;
+	width: 100%;
+	overflow: hidden;
+	font-size: 0;
+	text-align: center
+}
+
+.focus-pagination a {
+	display: inline-block
+}
+
+.pic-list {
+	overflow: hidden
+}
+
+.pic-list ul:before,
+.pic-list ul:after {
+	content: " ";
+	display: table
+}
+
+.pic-list ul:after {
+	clear: both
+}
+
+.pic-list ul li {
+	float: left
+}
+
+.pic-list ul li img {
+	display: block
+}
+
+.g-main-pic-font {
+	width: 360px;
+	margin-right: 40px
+}
+
+.g-main-list {
+	width: 420px
+}
+
+.g-footer {
+	margin-top: 40px;
+	padding-top: 40px;
+	border-top: 1px solid #eee
+}
+
+.g-footer .g-ststem {
+	width: 1160px;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.g-footer .g-copyright {
+	width: 100%;
+	height: 40px;
+	margin-top: 24px;
+	background-color: #1c1c1c
+}
+
+.g-footer .copyright-panel {
+	width: 1160px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.g-footer .copyright-panel:before,
+.g-footer .copyright-panel:after {
+	content: " ";
+	display: table
+}
+
+.g-footer .copyright-panel:after {
+	clear: both
+}
+
+.g-footer .copyright-panel .g-copyright-text {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 40px;
+	color: #ddd
+}
+
+.g-footer .copyright-panel .g-copyright-left {
+	width: 310px;
+	background: url(http://imgs.ebrun.com/master/images/ico_topbar_line.png?__sprite) no-repeat right 15px
+}
+
+.g-footer .copyright-panel .g-copyright-center {
+	width: 670px;
+	background: url(http://imgs.ebrun.com/master/images/ico_topbar_line.png?__sprite) no-repeat right 15px
+}
+
+.g-footer .copyright-panel .g-copyright-right {
+	width: 180px
+}
+
+.aside-panel {
+	float: right;
+	width: 300px;
+	height: 100%;
+	background-color: #fafafa
+}
+
+.side-com-title {
+	width: 260px;
+	margin: 0 auto;
+	height: 38px;
+	padding-top: 28px
+}
+
+.side-com-title:before,
+.side-com-title:after {
+	content: " ";
+	display: table
+}
+
+.side-com-title:after {
+	clear: both
+}
+
+.side-com-title h3 {
+	float: left;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 18px;
+	color: #1c1c1c
+}
+
+.side-com-title span {
+	float: left;
+	margin: 4px 0 0 13px;
+	font-size: 14px;
+	line-height: 14px;
+	color: #bbb
+}
+
+.side-com-title a {
+	float: right;
+	width: 13px;
+	height: 13px;
+	margin-top: 2px;
+	background: url(../images/ico_side2_jia.png) center center no-repeat
+}
+
+.side-com-title a.side-more-arrow {
+	background: url(http://imgs.ebrun.com/master/images/ico_side_more2.png?__sprite) center center no-repeat
+}
+
+.sider-bar {
+	position: fixed;
+	bottom: 100px;
+	right: 0;
+	z-index: 700
+}
+
+.sider-bar .app {
+	width: 60px
+}
+
+.sider-bar .app p {
+	height: 20px;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+	color: #333
+}
+
+.sider-bar .app img {
+	display: block;
+	width: 100%;
+	height: 60px
+}
+
+.sider-bar .back {
+	width: 60px;
+	height: 60px;
+	margin-top: 12px;
+	overflow: hidden;
+	background: #fafafa url(http://imgs.ebrun.com/master/images/ico_sider_back.png?__sprite) no-repeat center center;
+	cursor: pointer
+}
+
+.adv-panel {
+	width: 1160px;
+	margin: 20px auto 0
+}
+
+.adv-panel:before,
+.adv-panel:after {
+	content: " ";
+	display: table
+}
+
+.adv-panel:after {
+	clear: both
+}
+
+.adv-panel object {
+	display: block
+}
+
+.adv-panel>section {
+	position: relative;
+	text-align: center;
+	overflow: hidden
+}
+
+.adv-panel>section a {
+	display: block
+}
+
+.adv-panel>section img {
+	max-width: 100%
+}
+
+.adv-panel .adv-text {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 30px;
+	height: 18px;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(0, 0, 0, .6);
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+	cursor: pointer
+}
+
+.adv-panel .adv-text img {
+	display: block;
+	margin: 0 auto
+}
+
+.adv-panel .adv-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 18px;
+	height: 18px;
+	background: url(http://imgs.ebrun.com/master/images/ico_ad_close.png) no-repeat left top;
+	cursor: pointer
+}
+
+.adv-panel .bar-adv {
+	width: 100%
+}
+
+.adv-panel .long-adv {
+	width: 820px
+}
+
+.adv-panel .short-adv {
+	width: 300px
+}
+
+.adv-panel.max-screen-adv {
+	margin-top: 0
+}
+
+.adv-panel.bottom-adv {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	z-index: 800;
+	width: 1160px;
+	height: 70px;
+	margin-left: -580px
+}
+
+.adv-side-panel {
+	position: relative;
+	z-index: 800;
+	width: 30px;
+	height: 308px;
+	-webkit-transition: width .7s;
+	-moz-transition: width .7s;
+	-ms-transition: width .7s;
+	-o-transition: width .7s;
+	transition: width .7s
+}
+
+.adv-side-panel>section {
+	width: 100%;
+	height: 100%
+}
+
+.adv-side-panel .adv-text {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 30px;
+	height: 18px;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(0, 0, 0, .6);
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+	cursor: pointer
+}
+
+.adv-side-panel .adv-text img {
+	display: block;
+	margin: 3px auto 0
+}
+
+.adv-side-panel .adv-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 18px;
+	height: 18px;
+	background: url(http://imgs.ebrun.com/master/images/ico_ad_close.png) no-repeat left top;
+	cursor: pointer
+}
+
+.adv-side-panel.side-max-screen {
+	position: absolute;
+	top: 150px;
+	left: 0;
+	width: 30px;
+	height: 70px
+}
+
+.adv-side-panel.side-duilian-left,
+.adv-side-panel.side-duilian-right {
+	position: absolute;
+	top: 356px;
+	width: 0;
+	height: 308px;
+	overflow: hidden
+}
+
+.adv-side-panel.side-duilian-left .adv-text img,
+.adv-side-panel.side-duilian-right .adv-text img {
+	display: block;
+	width: auto;
+	height: auto
+}
+
+.adv-side-panel.side-duilian-left img,
+.adv-side-panel.side-duilian-right img {
+	display: block;
+	width: 100%;
+	height: 100%
+}
+
+.adv-side-panel.side-duilian-left>section:nth-of-type(1),
+.adv-side-panel.side-duilian-right>section:nth-of-type(1) {
+	display: none
+}
+
+.adv-side-panel.side-duilian-left>section:nth-of-type(2),
+.adv-side-panel.side-duilian-right>section:nth-of-type(2) {
+	display: block
+}
+
+.adv-side-panel.side-duilian-left.duilian-big>section:nth-of-type(1),
+.adv-side-panel.side-duilian-right.duilian-big>section:nth-of-type(1) {
+	display: block
+}
+
+.adv-side-panel.side-duilian-left.duilian-big>section:nth-of-type(2),
+.adv-side-panel.side-duilian-right.duilian-big>section:nth-of-type(2) {
+	display: none
+}
+
+.adv-side-panel.side-duilian {
+	width: 90px
+}
+
+.adv-side-panel.side-duilian-left {
+	left: 0
+}
+
+.adv-side-panel.side-duilian-right {
+	right: 0
+}
+
+.adv-side-panel.side-bottom-adv {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 799;
+	width: 30px;
+	height: 70px
+}
