@@ -264,12 +264,12 @@ textarea {
 
 .g-footer .copyright-panel .g-copyright-left {
 	width: 310px;
-	background: url(http://imgs.ebrun.com/master/images/ico_topbar_line.png?__sprite) no-repeat right 15px
+	background: url(../images/ico_topbar_line.png) no-repeat right 15px
 }
 
 .g-footer .copyright-panel .g-copyright-center {
 	width: 670px;
-	background: url(http://imgs.ebrun.com/master/images/ico_topbar_line.png?__sprite) no-repeat right 15px
+	background: url(../images/ico_topbar_line.png) no-repeat right 15px
 }
 
 .g-footer .copyright-panel .g-copyright-right {
@@ -325,7 +325,7 @@ textarea {
 }
 
 .side-com-title a.side-more-arrow {
-	background: url(http://imgs.ebrun.com/master/images/ico_side_more2.png?__sprite) center center no-repeat
+	background: url(../images/ico_side_more2.png) center center no-repeat
 }
 
 .sider-bar {
