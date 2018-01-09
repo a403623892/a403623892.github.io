@@ -358,7 +358,7 @@ textarea {
 	height: 60px;
 	margin-top: 12px;
 	overflow: hidden;
-	background: #fafafa url(http://imgs.ebrun.com/master/images/ico_sider_back.png?__sprite) no-repeat center center;
+	background: #fafafa url(../images/ico_sider_back.png) no-repeat center center;
 	cursor: pointer
 }
 
@@ -423,7 +423,7 @@ textarea {
 	right: 0;
 	width: 18px;
 	height: 18px;
-	background: url(http://imgs.ebrun.com/master/images/ico_ad_close.png) no-repeat left top;
+	background: url(../images/ico_ad_close.png) no-repeat left top;
 	cursor: pointer
 }
 
@@ -498,7 +498,7 @@ textarea {
 	right: 0;
 	width: 18px;
 	height: 18px;
-	background: url(http://imgs.ebrun.com/master/images/ico_ad_close.png) no-repeat left top;
+	background: url(../images/ico_ad_close.png) no-repeat left top;
 	cursor: pointer
 }
 
