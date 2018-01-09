@@ -163,6 +163,10 @@ body {
 	float: right
 }
 
+.other-main-title .sub-nav a {
+	float: left
+}
+
 .other-main-title .sub-nav .sub-nav-text {
 	position: relative;
 	top: 5px;
