@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	Object.prototype.addListener=function(ev,fn){
+	    if (this.attachEvent) {
+	        this.attachEvent('on' + ev, fn);
+	    }else{ 
+	        this.addEventListener(ev,fn,false);
+	    }
+	}
+	function CreateXmlHttp() {
+	    if (window.XMLHttpRequest)
+	    {// code for IE7+, Firefox, Chrome, Opera, Safari
+	      xmlhttp=new XMLHttpRequest();
+	    }else{// code for IE6, IE5
+	      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	    }    
+	}
+	var xmlhttp=null;
+	window.onload=function(){
+	    var loadbutton=document.getElementById('loadbutton');
+	    loadbutton.addListener('click',function(){
+	        CreateXmlHttp();//创建xmlHttpRequest对象
+	        //绑定事件，是我addListener自定义兼容各浏览器的绑定事件方法
+	        xmlhttp.addListener('loadstart',loadstart);
+	        xmlhttp.addListener('progress',progress);
+	        xmlhttp.addListener('load',load);
+	        xmlhttp.addListener('loadend',function(){console.log('执行结束了');});
+	        xmlhttp.open("get", "http://127.0.0.1/ceshi.pdf", true);//调用open的方法初始化（为了便于查看效果，我让其加载一个比较大的文件，因为最开始，我尝试使用一个php文件但是看不到效果，因为它立刻出现结果）
+	        xmlhttp.send();//调用send方法发送数据
+	    }); 
+	}
+	//处理开始接受数据的画面
+	function loadstart(){
+	    //当开始加载的时候，将defaultCont隐藏，将progressBox显示出来
+	    document.getElementById('defaultCont').style.display="none";
+	    document.getElementById('progressBox').style.display="block";
+	}
+	//处理进度
+	function progress(event){
+	    //修改progressTest里面的文本提示信息以及progress的长度
+	    var progressTest=document.getElementById('progressTest');
+	    var progress=document.getElementById('progress');
+	    if (event.lengthComputable) {//判断响应文本是否可以计算长度
+	        var recivedSize= event.position;//已经接收的字节数
+	        var totalSize=event.totalSize;//根据Content-Length相应头部确定的预期字节数
+	        progressTest.innerText=(recivedSize/totalSize*100 )+"%";
+	        progress.style.width=600*(recivedSize/totalSize)+"px";// 为什么是600，因为包含它的容器长度为600
+	    }
+	}
+	//处理加载完成
+	function load(event){
+	    //当开始加载的时候，将defaultCont显示出来，并将服务器返回的结果放在其里面，并将progressBox隐藏掉
+	    document.getElementById('progressBox').style.display="none";
+	    var defaultCont=document.getElementById('defaultCont')
+	    defaultCont.style.display="block";  
+	    //因为加载的是一个pdf文件，所以不需要将其显示在页面上,我直接输出了xmlhttp对象
+	    console.log(event.target);
+	    //defaultCont.innerText=event.target.responseText;//备注，其中event.target为xmlhttp对象 
+	    //使用innerText代替innerHTML更加安全，因为如果使用innerHTML，responseText中包含html代码或JavaScript代码时候，浏览器不会解析，如果你需要其解析，当然得用innerHTML。
+	}
+</script>
+<div style="width:600px; height:auto;margin:0 auto">
+    <input type="button" id="loadbutton" value="加载">
+    <div id="defaultCont">
+        <img src="1.jpg" width="600px">
+    </div>
+    <div id="progressBox" style="display:none;position:relative">
+        <div>正在加载：<span id="progressTest">0%</span></div>
+        <div id="progress" style="position:absolute; width:0px; top:35px; left:0;z-index:10; height:35px; background-color:#F00"></div>
+        <div style="position:absolute; width:600px; top:35px; left:0; z-index:1;height:35px; background-color:#040"></div>
+    </div>
+</div>
+</body>
+</html>
