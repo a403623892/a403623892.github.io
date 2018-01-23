@@ -107,7 +107,8 @@ export default {
   name: 'pos',
   data () {
     return {
-      tableData3:[{
+      tableData3:[],
+      newProduct:[{
               goodsId:1,
               goodsName:'香辣鸡腿堡',
               price:18
@@ -148,9 +149,7 @@ export default {
               goodsName:'香脆鸡柳',
               price:17
           }],
-      newProduct:[],
-      type0Goods:[],
-      type1Goods:[{
+      type0Goods:[{
               goodsId:1,
               goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos001.jpg",
               goodsName:'香辣鸡腿堡',
@@ -201,6 +200,7 @@ export default {
               goodsName:'香脆鸡柳',
               price:17
           }],
+      type1Goods:[],
       type2Goods:[],
       type3Goods:[],
       totalCount:0,
