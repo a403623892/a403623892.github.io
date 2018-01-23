@@ -46,9 +46,8 @@ export default {
 .left-nav ul li{
   float: left;
   width: 100%;
-  line-height: 60px;
+  line-height: 80px;
   cursor: pointer;
-  padding-top: 10px
 }
 .left-nav ul li div{
   line-height: 20px;
