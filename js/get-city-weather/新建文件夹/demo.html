@@ -6,9 +6,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-	function eatFood(foodName) {
-		console.log('我被调用了哦');
-		console.log(foodName);
+	function jsonCallback(foodName) {
+		console.log('我被调用了哦'+foodName.data);
 	}
 	</script>
 	<!-- 使用 script标签 发送了 get请求 去到了一个 php页面 -->
@@ -31,9 +30,9 @@
 	        sc.remove();                            //执行完毕后马上删除
 	    }
 	        //回调处理函数
-	    function jsonCallback(obj){
-			console.log(obj.data)
-	    }
+	  //   function jsonCallback(obj){
+			// console.log(obj.data)
+	  //   }
 	</script>
 </body>
 </html>
