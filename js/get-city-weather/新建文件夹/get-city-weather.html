@@ -45,6 +45,7 @@
 			$.ajax({
 				url:"http://wthrcdn.etouch.cn/weather_mini?city="+w_city+"",
 				dataType:'jsonP',
+				jsonpCallback:"city",
 				success:function(data){
 					console.log(data);
 					// console.log(data.data.forecast[0]);

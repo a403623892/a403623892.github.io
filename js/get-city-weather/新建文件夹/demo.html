@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function eatFood(foodName) {
+		console.log('我被调用了哦');
+		console.log(foodName);
+	}
+	</script>
+	<!-- 使用 script标签 发送了 get请求 去到了一个 php页面 -->
+<!-- 	<script type="text/javascript" src='http://wthrcdn.etouch.cn/weather_mini?city=北京&callback=eatFood'></script> -->
+	<!-- <script type="text/javascript" src='http://wthrcdn.etouch.cn/weather_mini?city=北京&callback=eatFood'></script> -->
+	<!-- <script type="text/javascript" src='http://wthrcdn.etouch.cn/weather_mini?city=北京&callback=eatFood'></script> -->
+	<!-- <script type="text/javascript" src='https://api.darlin.me/music/lyric/212892375/?callback=eatFood'></script> -->
+
+
+
+	<input type="text" id="text" value>
+	<button onclick="getJson(document.getElementById('text').value)">获取</button>
+	<script type="text/javascript">	
+		function getJson(keyword){
+	        //cb为回调处理函数名，wd是输入的关键字，其他参数不用理会
+	        var url='http://wthrcdn.etouch.cn/weather_mini?city='+keyword+'&callback=jsonCallback';
+	        var sc = document.createElement('script');//动态创建script标签
+	        sc.src=encodeURI(url);                      //引用服务器加载的js代码
+	        document.body.appendChild(sc);     //添加结点
+	        sc.remove();                            //执行完毕后马上删除
+	    }
+	        //回调处理函数
+	    function jsonCallback(obj){
+			console.log(obj.data)
+	    }
+	</script>
+</body>
+</html>
