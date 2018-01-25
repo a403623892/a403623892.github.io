@@ -34,36 +34,54 @@
 
 <script type="text/javascript" src='../js/jquery-3.0.0.min.js'></script>
 <script type="text/javascript">
-	
+	function myJsonPCallBack(data) {
+		var weather = data.data.forecast;
+		var weather = data.data.forecast;
+		// // // 读取模板
+		var obj = {
+			weatherResults: weather
+		}
+		var str = template('template',obj);
+		// // 添加到界面上
+		$("#weather").html(str);
+	}
 	$("#weather-btn").click(function () {
 		var w_city = $("select").val();
+		$.ajax({
+			url:'http://wthrcdn.etouch.cn/weather_mini?city='+w_city+'',
+			success:function(data){
+				// console.log(data);
+			},
+			dataType:'jsonp',
+			jsonpCallback:"myJsonPCallBack"
+		})
 		// var Reg =/^[\u4e00-\u9fa5]*$/;
 		// if(!Reg.test(w_city)){
 		// 	alert('请输入中文:您所在的城市');
 		// }else{
-			console.log(w_city);
-			$.ajax({
-				url:"http://wthrcdn.etouch.cn/weather_mini?city="+w_city+"",
-				dataType:'jsonP',
-				jsonpCallback:"city",
-				success:function(data){
-					console.log(data);
-					// console.log(data.data.forecast[0]);
-					console.log(data.data.forecast);
-					// 读取对象
-					// var weatherResults = data.results[0];
-					var weather = data.data.forecast;
-					// // // 读取模板
-					var obj = {
-						weatherResults: weather
-					}
-					var str = template('template',obj);
-					console.log(str);
+			// console.log(w_city);
+			// $.ajax({
+			// 	url:"http://wthrcdn.etouch.cn/weather_mini?city="+w_city+"",
+			// 	dataType:'jsonP',
+			// 	jsonpCallback:"city",
+			// 	success:function(data){
+			// 		console.log(data);
+			// 		// console.log(data.data.forecast[0]);
+			// 		console.log(data.data.forecast);
+			// 		// 读取对象
+			// 		// var weatherResults = data.results[0];
+			// 		var weather = data.data.forecast;
+			// 		// // // 读取模板
+			// 		var obj = {
+			// 			weatherResults: weather
+			// 		}
+			// 		var str = template('template',obj);
+			// 		console.log(str);
 					
-					// // 添加到界面上
-					$("#weather").html(str);
-				}
-			})
+			// 		// // 添加到界面上
+			// 		$("#weather").html(str);
+			// 	}
+			// })
 		// }
 	})
 </script>
