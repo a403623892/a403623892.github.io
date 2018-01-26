@@ -1,20 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <title>JSONP实现跨域2</title>
 </head>
 <body>
-	<script type="text/javascript">
-	var eatFood = function(data) {
-	  console.log(data)
-	  console.log('我是跨域请求来的数据-->' + data);
-	};
-	</script>
-	<script type="text/javascript" src='http://wthrcdn.etouch.cn/weather_mini?city=北京&callback=eatFood'></script>
-	<button>btn</button>
-	<script type="text/javascript">
-		
-	</script>
+    <div id="mydiv">
+        <button id="btn">点击</button>
+    </div>
+    <video controls="" autoplay="" name="media"></video>
 </body>
+<script type="text/javascript">
+    function _jsonpi2mpoz1xr1(response){
+            console.log(response);
+    }
+</script>
+<script type="text/javascript">
+    window.onload = function() {
+
+    var oBtn = document.getElementById('btn');
+
+    oBtn.onclick = function() {     
+
+        document.getElementsByTagName('video')[0].innerHTML='<source src="https://dl.stream.qqmusic.qq.com/C100001KxARP2Ij3hH.m4a?fromtag=46" type="audio/mp4">'
+    };
+};
+console.log(_utf8_encode('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='));
+const _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+
+// private method for UTF-8 encoding
+function _utf8_encode(string) {
+  string = string.replace(/\r\n/g, "\n");
+  var utftext = "";
+  for (var n = 0; n < string.length; n++) {
+    var c = string.charCodeAt(n);
+    if (c < 128) {
+      utftext += String.fromCharCode(c);
+    } else if ((c > 127) && (c < 2048)) {
+      utftext += String.fromCharCode((c >> 6) | 192);
+      utftext += String.fromCharCode((c & 63) | 128);
+    } else {
+      utftext += String.fromCharCode((c >> 12) | 224);
+      utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+      utftext += String.fromCharCode((c & 63) | 128);
+    }
+
+  }
+  return utftext;
+}
+
+function _utf8_decode(utftext) {
+  var string = "";
+  var i = 0;
+  var c = 0;
+  var c3 = 0;
+  var c2 = 0;
+  while (i < utftext.length) {
+    c = utftext.charCodeAt(i);
+    if (c < 128) {
+      string += String.fromCharCode(c);
+      i++;
+    } else if ((c > 191) && (c < 224)) {
+      c2 = utftext.charCodeAt(i + 1);
+      string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+      i += 2;
+    } else {
+      c2 = utftext.charCodeAt(i + 1);
+      c3 = utftext.charCodeAt(i + 2);
+      string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+      i += 3;
+    }
+  }
+  return string;
+}
+
+</script>
 </html>
