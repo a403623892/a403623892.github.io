@@ -325,29 +325,29 @@ export default {
        cursor: pointer;
  
    }
-   .cookList li span{
-       
-        display: block;
-        float:left;
-   }
-   .foodImg{
-       width: 40%;
-   }
-   .foodName{
-       font-size: 18px;
-       padding-left: 10px;
-       color:brown;
- 
-   }
-   .foodPrice{
-       font-size: 16px;
-       padding-left: 10px;
-       padding-top:10px;
-   }
-   .total{
-   	text-align: center
-   }
-   .total span{
-   	padding-right: 40px;
-   }
+.cookList li span{
+   
+    display: block;
+    float:left;
+}
+.foodImg{
+   width: 40%;
+}
+.foodName{
+   font-size: 18px;
+   padding-left: 10px;
+   color:brown;
+
+}
+.foodPrice{
+   font-size: 16px;
+   padding-left: 10px;
+   padding-top:10px;
+}
+.total{
+	text-align: center
+}
+.total span{
+	padding-right: 40px;
+}
 </style>
