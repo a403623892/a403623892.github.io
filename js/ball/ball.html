@@ -205,11 +205,11 @@ window.onload=function() {
         if (y<0) {
           y=0;
         }
-        if (x>inner.offsetWidth-zoom.offsetWidth) {
+        if (x>screen.offsetWidth-zoom.offsetWidth) {
           x=inner.offsetWidth-zoom.offsetWidth;
         }
-        if (y>inner.offsetWidth-zoom.offsetHeight) {
-          y=inner.offsetWidth-zoom.offsetHeight;
+        if (y>screen.offsetHeight-zoom.offsetHeight) {
+          y=screen.offsetHeight-zoom.offsetHeight;
         }
         zoom.style.left = x+'px';
         zoom.style.top = y+'px';
