@@ -3,39 +3,22 @@
   <head>
     <title>球</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <style type="text/css">
-body {margin:0;padding:0;text-align: center;background: #ccc;}
-#screen { width: 800px; height: 400px; position: relative; background: #fff;margin: 10px auto;vertical-align: bottom}
-#inner { position: absolute; left:0px; top:0px; width:100%; height:100%; }
-#screen p {color:white;font:bold 14px;}
-.one { background:url('./蓝泡.png') no-repeat; background-size: 100% auto;}
-.two { background:url('./蓝泡.png') no-repeat; background-size: auto 100%;}
-.three { background:url('./蓝泡.png') no-repeat; background-size: auto 100%; }
-.four { background:url('./蓝泡.png') no-repeat; background-size: auto 100%;}
-.five { background:url('./蓝泡.png') no-repeat; background-size: auto 100%;}
-.six { background:url('./蓝泡.png') no-repeat; background-size: auto 100%;}
-.seven { background:url('./蓝泡.png') no-repeat; background-size: auto 100%; }
-.eight { background:url('./蓝泡.png') no-repeat; background-size: auto 100%; }
-.nine { background:url('./蓝泡.png') no-repeat; background-size: auto 100%;}
-.ten{ background:url('./蓝泡.png') no-repeat; background-size: auto 100%;}
+    <style type="text/css">
+    body {margin:0;padding:0;text-align: center;background: #ccc;}
+    #screen { width: 800px; height: 400px; position: relative; background: #fff;margin: 10px auto;vertical-align: bottom;overflow: hidden}
+    #inner { position: absolute; left:0px; top:0px; width:100%; height:100%; }
+    .ball { background:url('./blue.png') no-repeat; background-size: 100% auto;}
+    .zoom{width: 80px;height: 80px;background:url('./red.png') no-repeat; background-size: 100% auto;position: absolute;}
     </style>
   </head>
   <body>
       <div id="screen" >
           <div id="inner">
-            <div class="one"></div>
-            <div class="two"></div>
-            <div class="three"></div>
-            <div class="four"></div>
-            <div class="five"></div>
-            <div class="six"></div>
-            <div class="seven"></div>
-            <div class="eight"></div>
-            <div class="nine"></div>
-            <div class="ten"></div>
+            <div class="ball"></div>
           </div>
+          <div class="zoom" id="zoom"></div>
       </div>
-      <input type="button" id="start" value="start" >
+      <input type="button" id="start" value="refresh" >
 <script type="text/javascript">
 var getFlag=function (id) {
   return document.getElementById(id);   //获取元素引用
@@ -46,7 +29,6 @@ var extend=function(des, src) {
   }
   return des;
 }
-var clss=['one','two','three','four','five','six','seven','eight','nine','ten'];
 var Ball=function (diameter,classn) {
     var ball=document.createElement("div");
     ball.className=classn;
@@ -55,17 +37,18 @@ var Ball=function (diameter,classn) {
     }
     return ball;
 }
-var Screen=function (cid,config) {
+var Screen=function (cid,config,redball) {
+    this.redball = getFlag(redball);
+    this.redball.radius = 40;
     //先创建类的属性
     var self=this;
     if (!(self instanceof Screen)) {
-        return new Screen(cid,config)
+        return new Screen(cid,config,redball)
     }
     config=extend(Screen.Config, config)    //configj是extend类的实例    self.container=getFlag(cid);            //窗口对象
     self.container=getFlag(cid);
     self.ballsnum=config.ballsnum;
     self.diameter=80;                       //球的直径
-    self.radius=self.diameter/2;
     self.spring=config.spring;              //球相碰后的反弹力
     self.bounce=config.bounce;              //球碰到窗口边界后的反弹力
     self.gravity=config.gravity;            //球的重力
@@ -77,7 +60,7 @@ var Screen=function (cid,config) {
     self.B_bound=self.container.clientHeight;
 };
 Screen.Config={                         //为属性赋初值
-    ballsnum:10,
+    ballsnum:100,
     spring:0.8,
     bounce:-0.9,
     gravity:0.05
@@ -85,6 +68,7 @@ Screen.Config={                         //为属性赋初值
 Screen.prototype={
     initialize:function () {
         var self=this;
+        self.ballsnum = self.randomNum(10, self.ballsnum)
         self.createBalls();
         self.timer=setInterval(function (){self.hitBalls()}, 30)
     },
@@ -93,16 +77,16 @@ Screen.prototype={
             num=self.ballsnum;
         var frag=document.createDocumentFragment();    //创建文档碎片，避免多次刷新       
         for (i=0;i<num;i++) {
-            var ball=new Ball(self.diameter,clss[i]);
-            //var ball=new Ball(self.diameter,clss[ Math.floor(Math.random()* num )]);//这里是随机的10个小球的碰撞效果
+            self.diameter = Math.floor(Math.random() * 80 + 30);
+            var ball=new Ball(self.diameter,'ball');
             ball.diameter=self.diameter;
-            ball.radius=self.radius;
+            ball.radius=Math.ceil(self.diameter/2);
             ball.style.left=(Math.random()*self.R_bound)+'px';  //球的初始位置，
             ball.style.top=(Math.random()*self.B_bound)+'px';
-            ball.vx=Math.random() * 6 -3;
-            ball.vy=Math.random() * 6 -3;
+            ball.vx = 0;
+            ball.vy = 0;
             frag.appendChild(ball);
-            self.balls[i]=ball;
+            self.balls[i] = ball;
         }
         self.container.appendChild(frag);
     },
@@ -110,7 +94,7 @@ Screen.prototype={
         var self=this, 
             num=self.ballsnum,
             balls=self.balls;
-        for (i=0;i<num-1;i++) {
+        for (i=0;i<num;i++) {
            var ball1=self.balls[i];
            ball1.x=ball1.offsetLeft+ball1.radius;      //小球圆心坐标
            ball1.y=ball1.offsetTop+ball1.radius;
@@ -138,6 +122,26 @@ Screen.prototype={
                    ball2.vy+=ay;
               }
            }
+           var redball=self.redball;
+               redball.x=redball.offsetLeft+redball.radius;
+               redball.y=redball.offsetTop+redball.radius;
+               dx=redball.x-ball1.x;                      //两小球圆心距对应的两条直角边
+               dy=redball.y-ball1.y;
+           var dist=Math.sqrt(dx*dx + dy*dy);       //两直角边求圆心距
+           var misDist=ball1.radius+redball.radius;   //圆心距最小值
+          if(dist < misDist) {                    
+               //假设碰撞后球会按原方向继续做一定的运动，将其定义为运动A   
+               var angle=Math.atan2(dy,dx);
+              //当刚好相碰，即dist=misDist时，tx=ballb.x, ty=ballb.y
+               tx=ball1.x+Math.cos(angle) * misDist; 
+               ty=ball1.y+Math.sin(angle) * misDist;
+              //产生运动A后，tx > ballb.x, ty > ballb.y,所以用ax、ay记录的是运动A的值
+               ax=(tx-redball.x) * self.spring;  
+               ay=(ty-redball.y) * self.spring;
+              //一个球减去ax、ay，另一个加上它，则实现反弹
+               ball1.vx-=ax;                         
+               ball1.vy-=ay;
+          } 
         }
         for (i=0;i<num;i++) {
             self.moveBalls(balls[i]);
@@ -150,35 +154,66 @@ Screen.prototype={
         ball.style.top=(ball.offsetTop+ball.vy)+'px';
         //判断球与窗口边界相碰，把变量名简化一下
         var L=self.L_bound, R=self.R_bound, T=self.T_bound, B=self.B_bound, BC=self.bounce;  
-        if (ball.offsetLeft < L) {
-            ball.style.left=L;
-            ball.vx*=BC;
+        if (ball.offsetLeft + ball.offsetWidth < L || ball.offsetLeft + ball.diameter - ball.offsetWidth > R || ball.offsetTop + ball.offsetWidth < T || ball.offsetTop + ball.diameter - ball.offsetWidth > B) {
+            self.container.removeChild(ball);
         }
-       else if (ball.offsetLeft + ball.diameter > R) {
-            ball.style.left=(R-ball.diameter)+'px';
-            ball.vx*=BC;
-        }
-       else if (ball.offsetTop < T) {
-            ball.style.top=T;
-            ball.vy*=BC;
-        }
-        if (ball.offsetTop + ball.diameter > B) {
-            ball.style.top=(B-ball.diameter)+'px';
-            ball.vy*=BC;
-        }
+       //  var L=self.L_bound, R=self.R_bound, T=self.T_bound, B=self.B_bound, BC=self.bounce;  
+       //  if (ball.offsetLeft < L) {
+       //      ball.style.left=L;
+       //      ball.vx*=BC;
+       //  }
+       // else if (ball.offsetLeft + ball.diameter > R) {
+       //      ball.style.left=(R-ball.diameter)+'px';
+       //      ball.vx*=BC;
+       //  }
+       // else if (ball.offsetTop < T) {
+       //      ball.style.top=T;
+       //      ball.vy*=BC;
+       //  }
+       //  if (ball.offsetTop + ball.diameter > B) {
+       //      ball.style.top=(B-ball.diameter)+'px';
+       //      ball.vy*=BC;
+       //  }
+    },
+    randomNum: function(m, n) {
+        return Math.floor(Math.random() * (n - m + 1) + m);
     }
 }
+
 window.onload=function() {
     var sc=null;
-    document.getElementById("inner").innerHTML='';
-        sc=new Screen('inner',{ballsnum:10, spring:0.3, bounce:-0.9, gravity:0.01});
+        document.getElementById("inner").innerHTML='';
+        sc=new Screen('inner',{ballsnum:30, spring:0.3, bounce:-0.9, gravity:0},'zoom');
         sc.initialize();
      getFlag('start').onclick=function () {
          document.getElementById("inner").innerHTML='';
-         sc=new Screen('inner',{ballsnum:10, spring:0.3, bounce:-0.9, gravity:0.01});
+         sc=new Screen('inner',{ballsnum:30, spring:0.3, bounce:-0.9, gravity:0},'zoom');
          sc.initialize();
      }
-
+     //红色小球
+     var zoom =  document.getElementById('zoom');
+     var inner =  document.getElementById('inner');
+     var screen =  document.getElementById('screen');
+     screen.addEventListener('mousemove',function(e) {
+      var _e = window.event || e;//事件对象
+        var x = _e.clientX - screen.offsetLeft -zoom.offsetWidth/2;//对象在盒子横向偏移量
+        //offsetLeft 相对于定位的父盒子左侧距离
+        var y = _e.clientY - screen.offsetTop -zoom.offsetHeight/2;//对象在盒子竖向偏移量
+        if (x<0) {
+          x =0;//做偏移小于盒子设为0
+        }
+        if (y<0) {
+          y=0;
+        }
+        if (x>inner.offsetWidth-zoom.offsetWidth) {
+          x=inner.offsetWidth-zoom.offsetWidth;
+        }
+        if (y>inner.offsetWidth-zoom.offsetHeight) {
+          y=inner.offsetWidth-zoom.offsetHeight;
+        }
+        zoom.style.left = x+'px';
+        zoom.style.top = y+'px';
+     })
 }
 </script>
 </body>
