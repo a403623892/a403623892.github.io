@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./paging.css">
+  <link rel="stylesheet" type="text/css" href="./common.css">
+  <script type="text/javascript" src="./jquery.js"></script>
+  <script type="text/javascript" src="./paging.js"></script>
+</head>
+
+<body>
+  <main class="loaded">
+    <div class="loader">
+      <div class="loader-inner ball-spin-fade-loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+  <!--     <span>
+      正在加载...
+    </span> -->
+    </div>
+  </main>
+  <div class="box" id="box" data-count="10"></div>
+  <script type="text/javascript">
+    $(".tab a:nth-child(3) li").addClass("activeli");
+
+    $(".ha").mouseover(function() {
+      $(".popover-fa").fadeIn();
+    })
+    $("#fabu").mouseover(function() {
+      $(".popover-fb").fadeIn();
+    })
+    $(".ha").mouseleave(function() {
+      $(".popover-fa").hide();
+    })
+    $("#fabu").mouseleave(function() {
+      $(".popover-fb").hide();
+    })
+
+    //点击样式
+    $(".ly-list li,.hy-list li,.csd li").click(function() {
+      $(this).addClass("scientific-active");
+      $(this).siblings().removeClass("scientific-active");
+
+    })
+    $(".zm-list li").click(function() {
+      $(this).addClass("word-active");
+      $(this).siblings().removeClass("word-active");
+    })
+
+    //所有数据
+    var ipt_val //搜索框
+    var number_pages; //总页数
+    var num; //输入框的页数
+    var list; //领域条件
+    var list2; //字母条件
+    //数据截取
+    $(".article").each(function() {
+      var data = $(this).text();
+      var data_str = data.substring(0, 12);
+      $(this).text(data_str + "...");
+    })
+    //点击样式
+    $(".ly-list li,.hy-list li,.csd li").click(function() {
+      $(this).addClass("scientific-active");
+      $(this).siblings().removeClass("scientific-active");
+
+    })
+    $(".zm-list li").click(function() {
+      $(this).addClass("word-active");
+      $(this).siblings().removeClass("word-active");
+    })
+    /*
+     * 页数问题
+     */
+    //取到页数
+    number_pages = $("#box").attr("data-count");
+    paging(number_pages);
+    // 分页
+    function paging(count_num) {
+      var setTotalCount = 301;
+      var is_ajax = 0;
+      $('#box').paging({
+        initPageNo: 1, // 初始页码
+        totalPages: count_num, //总页数
+        totalCount: '', // 条目总数
+        slideSpeed: 600, // 缓动速度。单位毫秒
+        jump: true, //是否支持跳转
+        callback: function(page) { // 回调函数
+          var page_ = page
+          if(page_ == is_ajax) {
+            return false;
+          } else {
+            ajax_page(page_);
+            $(".jump-text").val(page);
+            is_ajax = page_;
+          }
+        }
+      })
+    }
+
+    function ajax_page(num) {
+      $(".loading_img").css("display", "none");
+      $(".zhuanjia-content li").remove();
+      $(".loaded").css("display", "block");
+      list = $(".ly-true .scientific-active").index();
+      list2 = $(".zm-list .word-active").text();
+      ipt_val = $(".ipt input").val();
+      if(list == 0) {
+        list = null;
+      }
+      if(list2 == "ALL") {
+        list2 = null;
+      }
+      $.ajax({
+        type: "post",
+        url: "/kejiniu/index/expert/get_where_data",
+        data: {
+          'page': num,
+          'field': list,
+          'letter': list2,
+          'search': ipt_val
+        },
+        success: function(data) {
+          var old_page = data.old_page;
+          var data_data = data;
+          $(".zhuanjia-content li").remove();
+          var str = "";
+          if(data.code == 1) {
+            jQuery.each(data.data.data, function(index, val) {
+              var id_ = val["id"];
+              var url_ = 'http://' + window.location.host + '/kejiniu/index/expert/expert_info/id/' + id_;
+              str += '<li><div class="zhuanjia-img"><img src="/kejiniu/public/uploads/' + val['head_img'] + '" alt="" /></div>' +
+                '<span data-old="' + old_page + '" class="zhuanjia-name">' + val['name'] + '</span>' +
+                '<span class="from"><span class="uns">' + val['title'] + '</span></span>' +
+                '<span class="article">' + val['content'] + '</span>' +
+                '<div class="btn" style="background:white"><a href="' + url_ + '" >查看</a></div></li>'
+            });
+            $(".loaded").css("display", "none");
+            $('.zhuanjia-content').append(str);
+            //数据截取
+            $(".article").each(function() {
+              var data = $(this).text();
+              var data_str = data.substring(0, 12);
+              $(this).text(data_str + "...");
+            })
+
+          } else {
+            $(".loaded").css("display", "none");
+            $(".loading_img").css("display", "block");
+            //            $(".span_text_s").text(data.msg); 
+            //            $(".model_s").css("display","block");
+          }
+
+        },
+        error: function() {
+          $(".span_text_s").text("网络异常");
+          $(".model_s").css("display", "block");
+        }
+      });
+    }
+
+    //条件筛选ajax
+    function ajax_list() {
+      $(".loading_img").css("display", "none");
+      $(".zhuanjia-content li").remove();
+      $(".loaded").css("display", "block");
+      list = $(".ly-true .scientific-active").index();
+      list2 = $(".zm-list .word-active").text();
+      ipt_val = $(".ipt input").val();
+      if(list == 0) {
+        list = null;
+      }
+      if(list2 == "ALL") {
+        list2 = null;
+      }
+
+      $.ajax({
+        type: "post",
+        url: "/kejiniu/index/expert/get_where_data",
+        data: {
+          'page': 1,
+          'field': list,
+          'letter': list2,
+          'search': ipt_val
+        },
+        success: function(data) {
+          var data_data = data;
+          $(".zhuanjia-content li").remove();
+          var str = "";
+          if(data.code == 1) {
+            jQuery.each(data.data.data, function(index, val) {
+              var id_ = val["id"];
+              var url_ = 'http://' + window.location.host + '/kejiniu/index/expert/expert_info/id/' + id_;
+              str += '<li><div class="zhuanjia-img"><img src="/kejiniu/public/uploads/' + val['head_img'] + '" alt="" /></div>' +
+                '<span class="zhuanjia-name">' + val['name'] + '</span>' +
+                '<span class="from"><span class="uns">' + val['title'] + '</span></span>' +
+                '<span class="article">' + val['content'] + '</span>' +
+                '<div class="btn" style="background:white"><a href="' + url_ + '">查看</a></div></li>'
+            });
+            $(".loaded").css("display", "none");
+            $('.zhuanjia-content').append(str);
+            //数据截取
+            $(".article").each(function() {
+              var data = $(this).text();
+              var data_str = data.substring(0, 12);
+              $(this).text(data_str + "...");
+            })
+            //操作页码数
+            number_pages = data_data.data.count;
+            paging(number_pages);
+          } else {
+            $(".loaded").css("display", "none");
+            $(".loading_img").css("display", "block");
+            //            $(".span_text_s").text(data.msg);
+            //            $(".model_s").css("display","block");
+          }
+
+        },
+        error: function() {
+          $(".span_text_s").text("网络异常");
+          $(".model_s").css("display", "block");
+        }
+      });
+    }
+    /*
+     * 条件搜索效果
+     */
+    //领域
+    $(".ly-true li").click(function() {
+      ajax_list()
+    })
+    //字母
+    $(".zm-list li").click(function() {
+      ajax_list()
+    })
+    //搜索框
+    $(".ipt i").click(function() {
+      ajax_list()
+    })
+    $(".ipt input").bind('keypress', function(event) {
+      if(event.keyCode == 13)
+      {
+        ajax_list()
+      }
+    })
+  </script>
+</body>
+
+</html>
